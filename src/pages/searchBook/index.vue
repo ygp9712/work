@@ -1,18 +1,15 @@
 <template>
   <div>
-    <p></p>
+    这里是搜索图书页面
   </div>
-
 </template>
 
 <script>
 export default {
-  
+
 }
 </script>
 
-<style lang="stylus">
-  page
-    width: 100%
-    height: 100%
+<style lang="stylus" scoped>
+
 </style>
