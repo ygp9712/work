@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/detail/main",
-    "pages/index/main",
-    "pages/firstView/main",
+    "pages/personal/main",
     "pages/searchBook/main",
-    "pages/personal/main"
-
+    "pages/index/main",
+    "pages/booksList/main",
+    "pages/detail/main",
+    "pages/firstView/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

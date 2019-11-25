@@ -8,10 +8,10 @@
     <div class="booksList">
       <div class="booksNav">
         <span>全部商品</span>
-        <span class="more"> > </span>
+        <span class="more" @click="toBooksList(booksArr)"> > </span>
       </div>
       <div class="list">
-        <div @click="toDetail" class="bookItem" v-for="(item, index) of booksArr" :key="index" >
+        <div @click="toDetail(item)" class="bookItem" v-for="(item, index) of booksArr" :key="index" >
           <img :src="item.src" alt="">
           <p class="bookTitle">《{{item.title}}》</p>
           <p class="bookWriter">{{item.writer}}</p>
@@ -35,22 +35,42 @@ export default {
       booksArr: [{
         src: '/static/imgs/book1.jpg',
         title: '白夜行',
-        writer: '东野圭吾'
+        writer: '东野圭吾',
+        year: 2019,
+        price: 24,
+        publisher: '人民出版社',
+        authContent: '东野圭吾日本推理小说天王。1985年，凭借《放学后》获得第31回江户川乱步奖，从此成为职业作家，开始专职写作。早期作品多为精巧细致的本格推理，后期笔锋愈发老辣，文字鲜加雕琢，叙述简练凶狠，情节跌宕诡异，故事架构几至匪夷所思的地步，擅长从极不合理处写出极合理的故事，作风逐渐超越传统推理小说的框架。',
+        content: '内容1'
       },{
         src: '/static/imgs/book2.jpg',
         title: '嫌疑人X的献身',
-        writer: '东野圭吾'
+        writer: '东野圭吾',
+        year: 2017,
+        price: 25,
+        publisher: '南海出版社',
+        authContent: '东野圭吾日本推理小说天王。1985年，凭借《放学后》获得第31回江户川乱步奖，从此成为职业作家，开始专职写作。早期作品多为精巧细致的本格推理，后期笔锋愈发老辣，文字鲜加雕琢，叙述简练凶狠，情节跌宕诡异，故事架构几至匪夷所思的地步，擅长从极不合理处写出极合理的故事，作风逐渐超越传统推理小说的框架。',
+        content: '内容2'
       },{
         src: '/static/imgs/book3.jpg',
         title: '放学后',
-        writer: '东野圭吾'
+        writer: '东野圭吾',
+        year: 2014,
+        price: 23,
+        publisher: '人民出版社',
+        authContent: '东野圭吾日本推理小说天王。1985年，凭借《放学后》获得第31回江户川乱步奖，从此成为职业作家，开始专职写作。早期作品多为精巧细致的本格推理，后期笔锋愈发老辣，文字鲜加雕琢，叙述简练凶狠，情节跌宕诡异，故事架构几至匪夷所思的地步，擅长从极不合理处写出极合理的故事，作风逐渐超越传统推理小说的框架。',
+        content: '内容3'
       }]
     }
   },
   methods: {
-    toDetail () {
+    toDetail (bookItem) {
       wx.navigateTo({
-        url:'/pages/detail/main'
+        url:'/pages/detail/main?bookItem=' + JSON.stringify(bookItem)
+      })
+    },
+    toBooksList (bookItem) {
+      wx.navigateTo({
+        url:'/pages/booksList/main?bookItem=' + JSON.stringify(bookItem)
       })
     }
   }
