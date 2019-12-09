@@ -57,54 +57,54 @@ export default {
 
 <style lang="stylus" scoped>
   .container
-    margin: 0 auto
-    width: 600rpx
+    margin: 0 auto;
+    width: 600rpx;
     .book-detail
 
       .book-title
-        margin: 16rpx 0
-        text-align: center
-        font-weight: bold
-        font-size: 42rpx
+        margin: 16rpx 0;
+        text-align: center;
+        font-weight: bold;
+        font-size: 42rpx;
 
       .book-img
-        width: 100%
+        width: 100%;
       
       p
-      line-height: 46rpx
+      line-height: 46rpx;
 
     .share-btn
-      display: block
-      margin: 20rpx auto 0
-      text-align: center
-      width: 400rpx
-      height: 80rpx
-      line-height: 80rpx
-      border: 1rpx solid grey
-      background-color: #eaeaea
+      display: block;
+      margin: 20rpx auto 0;
+      text-align: center;
+      width: 400rpx;
+      height: 80rpx;
+      line-height: 80rpx;
+      border: 1rpx solid grey;
+      background-color: #eaeaea;
       /* &:hover
         background: #fff */
       
     .author
       .auth-title
-        font-size: 40rpx
-        color: red
-        text-align: center
-        font-weight: bold
-        line-height: 80rpx
+        font-size: 40rpx;
+        color: red;
+        text-align: center;
+        font-weight: bold;
+        line-height: 80rpx;
       .auth-content
-        text-indent: 65rpx
+        text-indent: 65rpx;
     .descript
       .des-title
-        font-size: 40rpx
-        color: green
-        text-align: center
-        font-weight: bold
-        line-height: 80rpx
+        font-size: 40rpx;
+        color: green;
+        text-align: center;
+        font-weight: bold;
+        line-height: 80rpx;
 
       .des-content
-        height: 700rpx
-        text-indent: 10rpx
+        height: 700rpx;
+        text-indent: 10rpx;
 
       
 </style>

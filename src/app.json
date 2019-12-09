@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/personal/main",
     "pages/searchBook/main",
+    "pages/paper/main",
+    "pages/paperList/main",
+    "pages/personal/main",
     "pages/index/main",
     "pages/booksList/main",
     "pages/detail/main",
@@ -25,7 +27,7 @@
       "selectedIconPath": "/static/imgs/icon-active-1.png"
     },{
       "pagePath": "pages/searchBook/main",
-      "text": "搜索图书",
+      "text": "做题",
       "iconPath": "/static/imgs/icon2.png",
       "selectedIconPath": "/static/imgs/icon-active-2.png"
     },{

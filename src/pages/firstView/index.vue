@@ -42,24 +42,24 @@ export default {
 
 <style lang="stylus" scoped>
    #container
-     width: 100%
-     height: 100%
+     width: 100%;
+     height: 100%;
      swiper 
-       width: 100%
-       height: 100%
+       width: 100%;
+       height: 100%;
        img
-         width: 100%
-         height: 100%
+         width: 100%;
+         height: 100%;
     .btn
-      position: absolute
-      left: 50%
-      bottom: .5rem
-      margin-left: -140rpx
-      width: 280rpx
-      height: 80rpx
-      text-align: center
-      line-height:80rpx     
-      display:block
-      background:black
-      color: white
+      position: absolute;
+      left: 50%;
+      bottom: .5rem;
+      margin-left: -140rpx;
+      width: 280rpx;
+      height: 80rpx;
+      text-align: center;
+      line-height: 80rpx;
+      display: block;
+      background: black;
+      color: white;
 </style>

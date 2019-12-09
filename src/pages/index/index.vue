@@ -80,40 +80,40 @@ export default {
 <style lang="stylus" scoped>
    #container
     swiper 
-      width: 100%
-      height: 400rpx //iphone6设计稿下的1rpx = 0.5px
+      width: 100%;
+      height: 400rpx; //iphone6设计稿下的1rpx = 0.5px
       img 
-        width: 100%
-        height: 100%
+        width: 100%;
+        height: 100%;
     .booksList
       .booksNav
-        line-height: 80rpx
-        padding: 10rpx
+        line-height: 80rpx;
+        padding: 10rpx;
         .more
-          float: right
+          float: right;
       .list
-        display: flex
-        flex-wrap: wrap
+        display: flex;
+        flex-wrap: wrap;
         .bookItem
-          box-sizing: border-box //将边框算进宽度之中去
-          width: 50%
-          display: flex
-          flex-direction: column
-          align-items: center
-          border-bottom: 2rpx solid #eee
+          box-sizing: border-box; //将边框算进宽度之中去
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-bottom: 2rpx solid #eee;
           &:nth-child(2n + 1) //取奇数的子元素即：（0+1），（2+1）等
-            border-right: 2rpx solid #eee
+            border-right: 2rpx solid #eee;
           //弹性盒子嵌套
           .bookTitle
-            font-size: 26rpx
-            line-height: 50rpx
+            font-size: 26rpx;
+            line-height: 50rpx;
           .bookWriter
-            font-size: 20rpx
-            line-height: 50rpx
+            font-size: 20rpx;
+            line-height: 50rpx;
           img
-            width: 200rpx
-            height: 200rpx
-            margin: 15rpx 0
+            width: 200rpx;
+            height: 200rpx;
+            margin: 15rpx 0;
 
             
 </style>

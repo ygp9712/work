@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 
+
 //关闭Vue开发中的一些提示
 Vue.prototype.productionTip = false;
 

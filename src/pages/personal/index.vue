@@ -44,21 +44,21 @@ export default {
 
 <style lang="stylus" scoped>
   .container
-    background: black
+    background: black;
     .header
-      padding: 40rpx
-      background: #1b644a
+      padding: 40rpx;
+      background: #1b644a;
       img 
-        width: 100rpx
-        height: 100rpx
-        vertical-align: middle
-        border-radius: 50rpx
+        width: 100rpx;
+        height: 100rpx;
+        vertical-align: middle;
+        border-radius: 50rpx;
         //放在父元素的垂直中间
       button 
-        display: inline-block
-        height: 60rpx
-        line-height: 60rpx
-        margin-left: 40rpx
-        max-width: 200rpx
-        vertical-align: middle
+        display: inline-block;
+        height: 60rpx;
+        line-height: 60rpx;
+        margin-left: 40rpx;
+        max-width: 200rpx;
+        vertical-align: middle;
 </style>
