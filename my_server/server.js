@@ -72,7 +72,17 @@ router.get('/test', (ctx, next) => {
     console.log('token验证失败！', e);
     ctx.body = '验证失败';
   }
-  
+
+  router.get('/checkAnswer', (ctx, next) => {
+    //ctx是上下文对象，取代express中的req和res
+    //1. 获取请求的参数
+    let paper = ctx.query.paper;
+    //2. 根据请求的地址和参数处理数据
+    let datas = require('./datas/answer/'+paper+".json");
+    console.log(datas);
+    //3. 响应数据
+    ctx.body = datas;
+   });
  
 
 })
