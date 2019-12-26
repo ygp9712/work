@@ -2,6 +2,7 @@
   "title": "政治",
   "paperList": [
     {"paper": "2019考研政治试题",
+     "nickname": "2019zhengzhi",
      "result": {"single": [], "multi": []}, 
      "singleChoice": [
        {
@@ -47,14 +48,14 @@
     {"paper": "2017考研政治试题"}]
 },{
   "title": "英语一",
-  "paperList": [{"paper": "2019考研英语一试题"},{"paper": "2018考研英语一试题"},{"paper": "2017考研英语一试题"}]
+  "paperList": [{"paper": "2019考研英语一试题", "nickname": "2019yingyuyi"}]
 },{
   "title": "英语二",
-  "paperList": [{"paper": "2019考研英语二试题"},{"paper": "2018考研英语二试题"},{"paper": "2017考研英语二试题"}]
+  "paperList": [{"paper": "2019考研英语二试题", "nickname": "2019yingyuer"}]
 },{
   "title": "数学一",
-  "paperList": [{"paper": "2019考研数学一试题"},{"paper": "2018考研数学一试题"},{"paper": "2017考研数学一试题"}]
+  "paperList": [{"paper": "2019考研数学一试题", "nickname": "2019shuxueyi"}]
 },{
   "title": "数学二",
-  "paperList": [{"paper": "2019考研数学二试题"},{"paper": "2018考研数学二试题"},{"paper": "2017考研数学二试题"}]
+  "paperList": [{"paper": "2019考研数学二试题", "nickname": "2019shuxueer"}]
 }]

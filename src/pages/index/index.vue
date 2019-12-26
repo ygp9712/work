@@ -5,6 +5,7 @@
         <img :src="item.src" alt="">
       </swiper-item>
     </swiper>
+    <div v-html="article"></div>
     <div class="booksList">
       <div class="booksNav">
         <span>全部商品</span>
@@ -25,6 +26,7 @@
 export default {
   data () {
     return {
+      article: '<strong>强烈</strong>',
       swiperArr: [{
         src: '/static/imgs/test1.png'
       },{
