@@ -27,7 +27,7 @@
             <div class="static" v-bind:class="[{right: item.right}, {wrong: !item.right}]" v-if="correctAnswer.single">
               <span>你的答案：{{arr[answer.single[index]-1]}}<br></span>
               <span>正确答案：{{arr[correctAnswer.single[index]-1]}}</span>
-              <div class="answer-btn" @click="showPic(paper.paper+'/s'+item.id)">查看答案</div>
+              <div class="answer-btn" @click="showPic(paper.paper+'_s'+item.id)">查看答案</div>
             </div>
           </div>
         </div> 
@@ -63,7 +63,7 @@
                     {{arr[cAnswer -1]}}
                   </span>
                 </div>
-                <div class="answer-btn" @click="showPic(paper.paper+'/m'+item.id)">查看答案</div>
+                <div class="answer-btn" @click="showPic(paper.paper+'_m'+item.id)">查看答案</div>
             </div>
            </div>
         </div> 
@@ -96,7 +96,7 @@ export default {
       arr: ['A','B','C','D'],
       modalShow: false,
       imgur: config.imgur,
-      picSrc: this.imgur + '2019考研政治试题/s1.png',
+      picSrc: this.imgur + 's1.png',
       scaleWidth: '',
       scaleHeight: '',
       baseWidth: '',
@@ -156,9 +156,18 @@ export default {
       this.modalShow = false;
     },
     showPic (name) {
-      console.log(name);
       let src = this.imgur+name+'.png';
-      this.picSrc= src;
+      wx.cloud.init();
+      wx.cloud.downloadFile({
+        fileID: `${src}`
+      }).then(res => {
+        // get temp file path
+      }).catch(error => {
+        // handle error
+        console.log(error);
+      })
+      this.picSrc = src;
+      console.log(src);
       this.modalShow = true;
     },
     imgLoad (e) {
@@ -305,6 +314,4 @@ export default {
           height: 100%;
           /* .modal-pic
             text-align: center; */
-
-
 </style>
