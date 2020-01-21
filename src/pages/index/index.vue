@@ -5,7 +5,7 @@
         <img :src="item.src" alt="">
       </swiper-item>
     </swiper>
-    <div v-html="article"></div>
+    <index-icon></index-icon>
     <div class="booksList">
       <div class="booksNav">
         <span>全部商品</span>
@@ -23,10 +23,13 @@
 </template>
 
 <script>
+import IndexIcon from './components/icon.vue';
 export default {
+  components: {
+    IndexIcon
+  },
   data () {
     return {
-      article: '<strong>强烈</strong>',
       swiperArr: [{
         src: '/static/imgs/test1.png'
       },{
@@ -74,7 +77,7 @@ export default {
       wx.navigateTo({
         url:'/pages/booksList/main?bookItem=' + JSON.stringify(bookItem)
       })
-    }
+    },
   }
 }
 </script>

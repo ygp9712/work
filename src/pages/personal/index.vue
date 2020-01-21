@@ -6,8 +6,15 @@
     </div>
     <div class="cardList">
       <div class="card">
-         
+         待做事务
       </div>
+      <div class="card">
+         我的收藏
+      </div>
+      <div class="card">
+         历史记录
+      </div>
+      
     </div>
   </div>
 </template>
@@ -44,7 +51,6 @@ export default {
 
 <style lang="stylus" scoped>
   .container
-    background: black;
     .header
       padding: 40rpx;
       background: #1b644a;
@@ -61,4 +67,9 @@ export default {
         margin-left: 40rpx;
         max-width: 200rpx;
         vertical-align: middle;
+    .cardList
+      .card
+        height: 80rpx;
+        line-height: 80rpx;
+        border-bottom: 2rpx solid #f2f2f2;
 </style>

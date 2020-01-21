@@ -27,7 +27,6 @@ export default {
        let result =  await request('/getList');
        this.papersItem = result;
       //发送请求给服务器获取数据
-    
   },
 }
 </script>

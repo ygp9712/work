@@ -18,19 +18,17 @@ const handleList = require('./helper/handleList');
  
   const list = await page.evaluate(() => {
  
-    let item = document.querySelectorAll('body > div.main-wrapper > div.container > div.index-row.part02.clearfix > div.part-body > div.yz-main > div:nth-child(3) > ul > li > a')
+    let item = document.querySelectorAll('body > div.main-wrapper > div.container > div.index-row.part02.clearfix > div.part-body > div.yz-main > div:nth-child(2) > div.list-content > ul > li > a')
     
     return Array.prototype.map.call(item, a => a.href)
   })
  
-
- 
   list.forEach(async item => {
+    let table = 'collegearticle'
     console.log(item);
-    await handleList(item)
+    await handleList(item, table);
   })
  
   await browser.close()
- 
 })()
  

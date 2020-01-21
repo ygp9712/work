@@ -1,12 +1,14 @@
 {
   "pages": [
+    "pages/index/main",
+    "pages/articleList/main",
+    "pages/personal/main",
     "pages/searchBook/main",
     "pages/paper/main",
     "pages/paperList/main",
-    "pages/personal/main",
-    "pages/index/main",
     "pages/booksList/main",
     "pages/detail/main",
+    "pages/article/main",
     "pages/firstView/main"
   ],
   "window": {

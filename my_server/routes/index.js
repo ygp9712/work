@@ -6,20 +6,41 @@ const router = new KoaRouter()
 var Fly = require('flyio/src/node')
 var fly = new Fly()
 var jwt = require('jsonwebtoken')
+const mysql = require('../mysql')
 
 //=================编写的接口=================
-// 核心代码
-router.get('/', (ctx, next) => {
+  // 核心代码
+router.get('/',async (ctx, next) => {
   // ctx是上下文对象，取代express中的req和res
-  // 1. 获取请求的参数
-
-  // 2. 根据请求的地址和参数处理数据
-
-  // 3. 响应数据
-  ctx.body = '服务器返回的数据'
+    ctx.body = "这里是wxapp服务器3000";
 })
 
-// 搜索图书的接口
+//
+router.get('/getArticleList', async(ctx, next) => {
+  let listName = ctx.query.listName;
+  let page = ctx.query.page;
+  let data = await mysql.queryAll(listName, page);
+  ctx.body = data;
+})
+
+router.get('/getArticle', async(ctx, next) =>{
+  let id = ctx.query.id;
+  let table = ctx.query.table;
+  let data = await mysql.queryArticle(id, table);
+  ctx.body = data;
+})
+
+router.get('/testArticle',async (ctx, next) => {
+  let id = ctx.query.id;
+  let data = await mysql.queryArticle(id);
+  if(data[0]){
+  ctx.body = data;
+  } else {
+    ctx.body = '没有找到';
+  }
+})
+
+
 let datas = require('../datas/data.json')
 router.get('/getList', (ctx, next) => {
   // 1. 获取请求的参数
@@ -31,7 +52,9 @@ router.get('/getList', (ctx, next) => {
   ctx.body = booksArr
 })
 
-// 获取用户openId的接口
+/**
+ * 获取用户openId的接口
+ */
 router.get('/getOpenId', async (ctx, next) => {
   // 1. 获取请求的参数
   let code = ctx.query.code // ctx = request
@@ -70,7 +93,10 @@ router.get('/test', (ctx, next) => {
     console.log('token验证失败！', e)
     ctx.body = '验证失败'
   }
-
+  
+ /**
+ * 检查答案正确的接口
+ */
   router.get('/checkAnswer', (ctx, next) => {
     // ctx是上下文对象，取代express中的req和res
     // 1. 获取请求的参数

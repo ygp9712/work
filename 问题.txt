@@ -1,0 +1,1 @@
+1、爬取网页时querySelectorAll获取的DOM元素无法被console出来，只能console获取出来的子元素例如href。
