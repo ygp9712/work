@@ -12,21 +12,32 @@ class Mysql {
 
   }
   queryAll (database, page) {
-    let num = 7;
+    let num = 8;
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,title from ${database} ORDER BY id DESC LIMIT ${(page-1)*num},${page*num}`, function (error, results, fields) {
+      pool.query(`SELECT id,title,time from ${database} ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };
-          console.log(`${(page-1)*num},${page*num}`)
+          /* console.log(`${(page-1)*num},${page*num}`) */
           resolve(results)
-          // console.log('The solution is: ', results[0].solution);
       });
     })
   }
   queryArticle (id, table) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT * from ${table} WHERE id = ${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  queryMax (table) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT  count(*) from ${table}`, function (error, results, fields) {
           if (error) {
               throw error
           };

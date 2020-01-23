@@ -3,12 +3,13 @@
     <div class="list">
       <div class="list-item" v-for="(item, index) of articleList" :key="index" @click="toArticle(item)">
         <p class="item-title" v-html="item.title"></p>
+        <span class="item-time">{{item.time}}</span>
       </div>
     </div>
     <div class="pagination" v-if="multiPage">
-      <div class="button disable" @click="toBackPage()">上一页</div>
-      <span class="page">第{{page}}页</span>
-      <div class="button" @click="toNextPage()">下一页</div>
+      <div :class="leftClass" @click="toBackPage()">上一页</div>
+      <span class="page">{{page}} / {{maxPage}}</span>
+      <div :class="rightClass" @click="toNextPage()">下一页</div>
     </div>
   </div>
 </template>
@@ -21,18 +22,27 @@ export default {
     return {
       articleList: [],
       page: 1,
+      maxPage: 0,
       leftBtn: 1,
       rightBtn: 1,
-      multiPage: 1
+      multiPage: 1,
+      leftClass: 'button disable',
+      rightClass: 'button'
     }
   },
   async mounted () {
     wx.setNavigationBarTitle({
       title: this.$mp.query.name
     }) 
-    console.log(this.$mp.query);
     let result =  await request('/getArticleList', {listName: this.$mp.query.listName, page: this.page});
+    let result2 = await request('/getArticleListMax', {listName: this.$mp.query.listName});
     this.articleList = result;
+    this.maxPage = Math.ceil(result2[0]["count(*)"] / 8);
+    if(this.maxPage === 1) {
+      this.multiPage = 0;
+    } else {
+      this.multiPage = 1;
+    }
   },
   methods: {
     toArticle(article) {
@@ -43,19 +53,35 @@ export default {
     },
     async toBackPage(){
       console.log('上一页');
-      if(this.page === 1) return
+      if (this.page === 1) return
       this.page--;
+      if (this.page === 1) {
+        this.leftClass = 'button disable';
+      }
+      if (this.rightClass === 'button disable') {
+        this.rightClass = 'button';
+      }
       let result =  await request('/getArticleList', {listName: this.$mp.query.listName, page: this.page});
       this.articleList = result;
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
     },
     async toNextPage(){
       console.log('下一页');
-      let result =  await request('/getArticleList', {listName: this.$mp.query.listName, page: this.page+1});
-      if (result[0]){
-        this.articleList = result;
-        this.page++;
+      if (this.page === this.maxPage) return
+      if (this.page === 1) {
+        this.leftClass = 'button';
       }
-      console.log(result);
+      this.page++;
+      if (this.page === this.maxPage) {
+        this.rightClass = 'button disable'
+      }
+      let result =  await request('/getArticleList', {listName: this.$mp.query.listName, page: this.page});
+        this.articleList = result;
+        wx.pageScrollTo({
+          scrollTop: 0
+        })
     }
   }
 }
@@ -65,6 +91,7 @@ export default {
   .container
     .list
       .list-item
+        position: relative;
         height: 200rpx;
         line-height: 200rpx
         border-bottom: 2rpx solid #f2f2f2;
@@ -74,6 +101,12 @@ export default {
           line-height: 36rpx;
           vertical-align: middle;
           font-size: 36rpx;
+        .item-time
+          position: absolute;
+          font-size: 30rpx;
+          color: #D3D3D3;
+          bottom: -60rpx;
+          right: 20rpx;
     .pagination
       margin-top: 60rpx;
       width: 100%;

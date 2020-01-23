@@ -23,6 +23,12 @@ router.get('/getArticleList', async(ctx, next) => {
   ctx.body = data;
 })
 
+router.get('/getArticleListMax', async(ctx, next) => {
+  let listName = ctx.query.listName;
+  let data = await mysql.queryMax(listName);
+  ctx.body = data;
+})
+
 router.get('/getArticle', async(ctx, next) =>{
   let id = ctx.query.id;
   let table = ctx.query.table;

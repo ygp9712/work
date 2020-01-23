@@ -6,7 +6,7 @@
     "pages/searchBook/main",
     "pages/paper/main",
     "pages/paperList/main",
-    "pages/booksList/main",
+    "pages/bookList/main",
     "pages/detail/main",
     "pages/article/main",
     "pages/firstView/main"

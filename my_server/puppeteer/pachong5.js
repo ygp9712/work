@@ -10,7 +10,7 @@ const handleList = require('./helper/handleList');
  
   const page = await browser.newPage()
  
-  await page.goto('https://yz.chsi.com.cn/kyzx/tjzd/', {waitUntil: 'networkidle2'})
+  await page.goto('https://yz.chsi.com.cn/kyzx/jyxd', {waitUntil: 'networkidle2'})
  
 
  
@@ -24,13 +24,13 @@ const handleList = require('./helper/handleList');
   })
   /* list.splice(0,20); */
   list.splice(10, 99);
-
+  console.log(list);
   list.forEach(async item => {
-    let table = 'adjustarticle';
+    let table = 'experience';
     console.log(item);
-    await handleList(item, table)
+    await handleList(item, table);
   })
  
-  await browser.close();
+  await browser.close()
 })()
  

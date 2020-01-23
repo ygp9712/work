@@ -6,13 +6,13 @@
     </div>
     <div class="cardList">
       <div class="card">
-         待做事务
+        待做事务
       </div>
       <div class="card">
-         我的收藏
+        我的收藏
       </div>
       <div class="card">
-         历史记录
+        历史记录
       </div>
       
     </div>

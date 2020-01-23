@@ -23,9 +23,7 @@
       <p class="des-title">
         内容简介
       </p>
-      <p class="des-content">
-        {{bookItem.content}}
-      </p>
+      <p class="des-content" v-html="bookItem.content"></p>
     </div>
   </div>
 </template>
@@ -104,7 +102,7 @@ export default {
 
       .des-content
         height: 700rpx;
-        text-indent: 10rpx;
+        text-indent: 65rpx;
 
       
 </style>

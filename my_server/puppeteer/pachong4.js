@@ -10,7 +10,7 @@ const handleList = require('./helper/handleList');
  
   const page = await browser.newPage()
  
-  await page.goto('https://yz.chsi.com.cn/kyzx/yxzc/', {waitUntil: 'networkidle2'})
+  await page.goto('https://yz.chsi.com.cn/kyzx/kydt', {waitUntil: 'networkidle2'})
  
 
  
@@ -22,11 +22,11 @@ const handleList = require('./helper/handleList');
     
     return Array.prototype.map.call(item, a => a.href)
   })
-  list.splice(0,10);
+  list.splice(0,20);
   list.splice(10, 99);
   console.log(list);
   list.forEach(async item => {
-    let table = 'collegearticle'
+    let table = 'dynamicarticle'
     console.log(item);
     await handleList(item, table);
   })

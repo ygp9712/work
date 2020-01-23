@@ -10,7 +10,7 @@ const handleList = require('./helper/handleList');
  
   const page = await browser.newPage()
  
-  await page.goto('https://yz.chsi.com.cn/', {waitUntil: 'networkidle2'})
+  await page.goto('https://yz.chsi.com.cn/kyzx/zcdh/', {waitUntil: 'networkidle2'})
  
 
  
@@ -18,11 +18,12 @@ const handleList = require('./helper/handleList');
  
   const list = await page.evaluate(() => {
  
-    let item = document.querySelectorAll('body > div.main-wrapper > div.container > div.index-row.part02.clearfix > div.part-body > div.yz-main > div:nth-child(3) > ul > li > a')
+    let item = document.querySelectorAll('body > div.main-wrapper > div.container > div.content-box.clearfix > div.content-l > ul > li > a')
     
     return Array.prototype.map.call(item, a => a.href)
   })
- 
+    /* list.splice(0,20); */
+    list.splice(10, 99);
 
  
   list.forEach(async item => {
