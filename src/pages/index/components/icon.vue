@@ -23,16 +23,16 @@ export default {
     return {
       buttonList: [{
         name: '国家政策',
-        listName: 'countryarticle',
+        listName: 'country',
       },{
         name: '院校政策',
-        listName: 'collegearticle',
+        listName: 'college',
       },{
         name: '调剂指南',
-        listName: 'adjustarticle',
+        listName: 'adjust',
       },{
         name: '考研动态',
-        listName: 'dynamicarticle',
+        listName: 'dynamic',
       },{
         name: '经验心得',
         listName: 'experience',

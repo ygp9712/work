@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-   #container
+  #container
     swiper 
       width: 100%;
       height: 400rpx; //iphone6设计稿下的1rpx = 0.5px

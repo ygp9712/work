@@ -1,14 +1,17 @@
 <template>
   <div class="container">
     <list-scroll></list-scroll>
+    <list-content></list-content>
   </div>
 </template>
 
 <script>
 import ListScroll from './components/scroll.vue';
+import ListContent from './components/content.vue';
 export default {
   components: {
-    ListScroll
+    ListScroll,
+    ListContent
   },
   data () {
     return {

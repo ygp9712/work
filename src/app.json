@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/bookList/main",
     "pages/articleList/main",
     "pages/personal/main",
-    "pages/searchBook/main",
+    "pages/getPaper/main",
     "pages/paper/main",
     "pages/paperList/main",
-    "pages/bookList/main",
     "pages/detail/main",
     "pages/article/main",
     "pages/firstView/main"
@@ -28,7 +28,7 @@
       "iconPath": "/static/imgs/icon1.png",
       "selectedIconPath": "/static/imgs/icon-active-1.png"
     },{
-      "pagePath": "pages/searchBook/main",
+      "pagePath": "pages/getPaper/main",
       "text": "做题",
       "iconPath": "/static/imgs/icon2.png",
       "selectedIconPath": "/static/imgs/icon-active-2.png"

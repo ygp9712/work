@@ -26,7 +26,7 @@ const handleList = require('./helper/handleList');
   list.splice(10, 99);
 
   list.forEach(async item => {
-    let table = 'adjustarticle';
+    let table = 'article_adjust';
     console.log(item);
     await handleList(item, table)
   })

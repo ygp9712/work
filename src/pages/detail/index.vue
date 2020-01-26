@@ -16,7 +16,7 @@
         作者简介
       </p>
       <p class="auth-content">
-         {{bookItem.authContent}}
+        {{bookItem.authContent}}
       </p>
     </div>
     <div class="descript">
@@ -29,14 +29,18 @@
 </template>
 
 <script>
+import request from '../../utils/request';
 export default {
   data() {
     return {
       bookItem: {}
     }
   },
-  mounted () {
-    this.bookItem = JSON.parse(this.$mp.query.bookItem);
+  async mounted () {
+    let result = await request('/getBook', {id : this.$mp.query.id, subject : this.$mp.query.subject});
+    this.bookItem = result[0];
+    console.log(result);
+    console.log(this.bookItem);
     wx.setNavigationBarTitle({
       title: this.bookItem.title
     })

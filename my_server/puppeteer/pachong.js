@@ -27,7 +27,7 @@ const handleList = require('./helper/handleList');
 
  
   list.forEach(async item => {
-    let table = 'countryarticle';
+    let table = 'article_country';
     console.log(item);
     await handleList(item, table)
   })

@@ -24,8 +24,8 @@ export default {
   },
   async mounted () {
       //获取用户输入的内容
-       let result =  await request('/getList');
-       this.papersItem = result;
+      let result =  await request('/getList');
+      this.papersItem = result;
       //发送请求给服务器获取数据
   },
 }

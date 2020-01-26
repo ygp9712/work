@@ -5,3 +5,5 @@
 3、img无法动态赋值（使用require）
 
 4、图片无法100%宽度自适应，需要在html标签里面修改mode
+
+5、div内设置未知宽高的img居中：使用relative&absolute，且图片top：50%，left：50%，加上transform: translate(-50%,-50%)(重要）

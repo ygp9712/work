@@ -15,17 +15,29 @@ router.get('/',async (ctx, next) => {
     ctx.body = "这里是wxapp服务器3000";
 })
 
-//
+router.get('/getBook', async(ctx, next) => {
+  let id = ctx.query.id;
+  let subject = ctx.query.subject;
+  let data = await mysql.queryBook(id, subject);
+  ctx.body = data;
+})
+
+router.get('/getBookList', async (ctx,next) => {
+  let subject = ctx.query.subject;
+  let data = await mysql.queryBookList(subject);
+  ctx.body = data;
+})
+
 router.get('/getArticleList', async(ctx, next) => {
   let listName = ctx.query.listName;
   let page = ctx.query.page;
-  let data = await mysql.queryAll(listName, page);
+  let data = await mysql.queryArticlePage(listName, page);
   ctx.body = data;
 })
 
 router.get('/getArticleListMax', async(ctx, next) => {
   let listName = ctx.query.listName;
-  let data = await mysql.queryMax(listName);
+  let data = await mysql.queryArticleMax(listName);
   ctx.body = data;
 })
 

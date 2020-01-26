@@ -11,10 +11,32 @@ class Mysql {
   constructor () {
 
   }
-  queryAll (database, page) {
+  queryBook (id, database) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,src,year,price,title,writer,publisher,authContent,content from subject_${database} WHERE id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  queryBookList (database) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,src,title,writer,publisher from subject_${database} ORDER BY id DESC`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  queryArticlePage (database, page) {
     let num = 8;
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,title,time from ${database} ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
+      pool.query(`SELECT id,title,time from article_${database} ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -25,7 +47,7 @@ class Mysql {
   }
   queryArticle (id, table) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * from ${table} WHERE id = ${id}`, function (error, results, fields) {
+      pool.query(`SELECT * from article_${table} WHERE id = ${id}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -35,9 +57,9 @@ class Mysql {
     })
   }
 
-  queryMax (table) {
+  queryArticleMax (table) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT  count(*) from ${table}`, function (error, results, fields) {
+      pool.query(`SELECT  count(*) from article_${table}`, function (error, results, fields) {
           if (error) {
               throw error
           };
