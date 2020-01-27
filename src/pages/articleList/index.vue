@@ -44,6 +44,11 @@ export default {
       this.multiPage = 1;
     }
   },
+  onUnload() {
+    this.page = 1;
+    this.leftClass = 'button disable';
+    this.rightClass = 'button';
+  },
   methods: {
     toArticle(article) {
       console.log(article);

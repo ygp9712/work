@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <div class="list">
-      <div class="listItem"  v-for="(item,index) of papersItem" :key="index" @click="toPaperList(item.paperList)">
-        {{item.title}}</div>
+      <div class="listItem"  v-for="(item,index) of papersItem" :key="index" @click="toPaperList(item.port)">
+        <div class="item-content">
+          {{item.title}}
+        </div></div>
     </div>
   </div>
 </template>
@@ -12,38 +14,68 @@ import request from '../../utils/request';
 export default {
   data () {
     return {
-      papersItem: []
+      papersItem: [
+      {
+        title: '政治',
+        port: 'zhengzhi'
+      },
+      {
+        title: '数学一',
+        port: 'shuxueyi'
+      },
+      {
+        title: '数学二',
+        port: 'shuxueer',
+      },
+      {
+        title: '英语一',
+        port: 'yingyuyi'
+      },
+      {
+        title: '英语二',
+        port: 'yingyuer'
+      }]
     }
   },
   methods: {
-    toPaperList (paperList) {
+    toPaperList (port) {
       wx.navigateTo({
-        url:'/pages/paperList/main?paperList=' + JSON.stringify(paperList)
+        url: `/pages/paperList/main?port=${port}`
       })
     }
   },
-  async mounted () {
-      //获取用户输入的内容
-      let result =  await request('/getList');
-      this.papersItem = result;
-      //发送请求给服务器获取数据
+  mounted () {
+
   },
 }
 </script>
 
 <style lang="stylus" scoped>
-  .list
-    display: flex;
-    flex-wrap: wrap;
-    .listItem
-      display: inline-block;
-      box-sizing: border-box;
-      flex-direction: row;
-      line-height: 200rpx;
-      text-align: center;
-      width: 50%;
-      height: 200rpx;
-      border-bottom: 2rpx solid #eee;
-      &:nth-child(2n + 1) //取奇数的子元素即：（0+1），（2+1）等
-        border-right: 2rpx solid #eee;
+  .container
+    display: block;
+    background: #f2f2f2;
+    height: 100%;
+    .list
+      display: flex;
+      flex-wrap: wrap;
+      .listItem
+        position: relative
+        display: inline-block;
+        box-sizing: border-box;
+        flex-direction: row;
+        line-height: 270rpx;
+        text-align: center;
+        width: 50%;
+        height: 300rpx;
+        .item-content
+          position: absolute;
+          display: block;
+          top: 50%;
+          left: 50%;
+          background: #ffffff;
+          width: 90%;
+          height: 90%;
+          transform: translate(-50%,-50%);
+          border-radius: 16rpx;
+          box-shadow: 4rpx 4rpx 15rpx grey;
 </style>

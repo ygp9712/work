@@ -3,7 +3,8 @@
     <div class="banner">选择科目</div>
     <div class="scroll-area">
       <div class="subject-wrapper">
-        <div class="subject-item" v-for="(item, index) of subjectList" :key="index" @click="scrollClick(item.subjectPort)">
+        <div  :class="item.btnClass" v-for="(item, index) of subjectList" 
+              :key="index" @click="scrollClick(item.subjectPort, index)">
           {{item.subjectName}}
         </div>
       </div>
@@ -17,27 +18,35 @@ export default {
   name: 'BookListScroll',
   data() {
     return {
+      nowActive: 0,
       nowSubject: 'english',
       subjectList: [
         {
           subjectName: '英语',
-          subjectPort: 'english'
+          subjectPort: 'english',
+          btnClass: 'subject-item active'
         },
         {
           subjectName: '政治',
-          subjectPort: 'politics'
+          subjectPort: 'politics',
+          btnClass: 'subject-item'
         },
         {
           subjectName: '数学',
-          subjectPort: 'math'
+          subjectPort: 'math',
+          btnClass: 'subject-item'
         }
       ]
     }
   },
   methods: {
-    scrollClick(port) {
+    scrollClick(port, index) {
+      if(index === this.nowActive) return
       this.nowSubject = port;
       Bus.$emit('scrollClick', this.nowSubject)
+      this.subjectList[this.nowActive].btnClass = 'subject-item';
+      this.subjectList[index].btnClass = 'subject-item active';
+      this.nowActive = index;
     }
   },
 }
@@ -73,6 +82,9 @@ export default {
           height: 80rpx;
           border: 2rpx solid #00868B;
           border-radius: 20rpx;
+        .active
+          color: #ffffff;
+          background: #1E90FF;
         .subject-item:last-child
           margin-right: 0;
     ::-webkit-scrollbar

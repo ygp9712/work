@@ -59,15 +59,14 @@ router.get('/testArticle',async (ctx, next) => {
 })
 
 
-let datas = require('../datas/data.json')
-router.get('/getList', (ctx, next) => {
+router.get('/getPaperList', (ctx, next) => {
   // 1. 获取请求的参数
-
+  let port = ctx.query.port;
   // 2. 根据请求的地址和参数处理数据
-  let booksArr = datas
+  let datas = require(`../datas/paper/${port}.json`)
   // 3. 响应数据
-  console.log(booksArr)
-  ctx.body = booksArr
+  console.log(datas)
+  ctx.body = datas;
 })
 
 /**
