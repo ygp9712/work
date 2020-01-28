@@ -14,7 +14,7 @@ export default function (url, data={}, method='GET') {
       },
       success: (res) => {
          //异步函数不能使用return
-         resolve(res.data);
+        resolve(res.data);
       },
       fail: (error) => {
         reject(error);

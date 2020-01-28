@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import request from '../../../utils/request';
 export default {
   name: 'IndexBook',
   data() {
@@ -45,7 +46,8 @@ export default {
     }
   },
   methods: {
-    toDetail (id, subject) {
+    async toDetail (id, subject) {
+      await request('/addHistory', {item_id : id, item_type: 'book', item_class : subject})
       wx.navigateTo({
         url:`/pages/detail/main?id=${id}&subject=${subject}`
       })

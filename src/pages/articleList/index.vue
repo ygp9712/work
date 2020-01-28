@@ -50,8 +50,9 @@ export default {
     this.rightClass = 'button';
   },
   methods: {
-    toArticle(article) {
+    async toArticle(article) {
       console.log(article);
+      await request('/addHistory', {item_id : article.id, item_type: 'article', item_class : this.$mp.query.listName})
       wx.navigateTo({
         url:`/pages/article/main?table=${this.$mp.query.listName}&id=${article.id}`
       })

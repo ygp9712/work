@@ -29,7 +29,8 @@ export default {
     }
   },
   methods: {
-    toDetail (id) {
+    async toDetail (id) {
+      await request('/addHistory', {item_id : id, item_type: 'book', item_class : this.subject})
       wx.navigateTo({
         url:`/pages/detail/main?id=${id}&subject=${this.subject}`
       })
@@ -85,6 +86,9 @@ export default {
             display: flex;
             flex-direction: column;
             .book-title
+              display: block;
+              width: 100%;
+              height: 100rpx;
               font-size: 38rpx;
               overflow: hidden
               text-overflow: ellipsis

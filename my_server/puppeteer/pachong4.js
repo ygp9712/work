@@ -22,11 +22,11 @@ const handleList = require('./helper/handleList');
     
     return Array.prototype.map.call(item, a => a.href)
   })
-  list.splice(0,20);
+ /*  list.splice(0,20); */
   list.splice(10, 99);
   console.log(list);
   list.forEach(async item => {
-    let table = 'article_dynamic'
+    let table = 'dynamic'
     console.log(item);
     await handleList(item, table);
   })

@@ -15,6 +15,36 @@ router.get('/',async (ctx, next) => {
     ctx.body = "这里是wxapp服务器3000";
 })
 
+router.get('/queryHistory', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let item_id = ctx.query.item_id;
+  let item_type = ctx.query.item_type;
+  let item_class = ctx.query.item_class;
+  let answer = await mysql.queryHistory(user_id, item_id, item_type, item_class);
+  console.log(answer);
+  ctx.body = answer;
+})
+
+router.get('/addHistory', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let item_id = ctx.query.item_id;
+  let item_type = ctx.query.item_type;
+  let item_class = ctx.query.item_class;
+  let time = decoded.iat;
+  let query = await mysql.queryHistory(user_id, item_id, item_type, item_class);
+  if(query[0])
+  {
+    await mysql.deleteHistory(query[0].id)
+  }
+  let answer = await mysql.insertHistory(user_id, item_id, item_type, item_class, time);
+  console.log(answer);
+  ctx.body = answer;
+})
+
 router.get('/getBook', async(ctx, next) => {
   let id = ctx.query.id;
   let subject = ctx.query.subject;
@@ -96,7 +126,7 @@ router.get('/getOpenId', async (ctx, next) => {
 // 测试验证身份token的接口
 router.get('/test', (ctx, next) => {
   // 获取token的值
-  let token = ctx.request.header.authorization
+  let token = ctx.request.header.authorization;
   console.log(token)
   let decoded = jwt.verify(token, 'yangguo')
   try {

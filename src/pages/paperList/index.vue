@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="paper-item" v-for="(item, index) of paperList" :key="index" @click="goPaper(item)">
+    <div class="paper-item" v-for="(item, index) of paperList" :key="index" @click="goPaper(item, index)">
       <div class="item-content">
         {{item.paper}}
       </div>
@@ -17,7 +17,8 @@ export default {
     }
   },
   methods:{
-    goPaper (paper) {
+    async goPaper (paper, index) {
+      await request('/addHistory', {item_id : index, item_type: 'paper', item_class : this.$mp.query.port})
       wx.navigateTo({
         url:'/pages/paper/main?paper=' + JSON.stringify(paper)
       })

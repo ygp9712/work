@@ -11,7 +11,7 @@
       <div class="card">
         我的收藏
       </div>
-      <div class="card">
+      <div class="card" @click="goHistory()">
         历史记录
       </div>
       
@@ -44,6 +44,9 @@ export default {
         this.userInfo = res.mp.detail.userInfo;
       }
       console.log(this.userInfo);
+    },
+    async goHistory () {
+
     }
   }
 }
@@ -69,7 +72,8 @@ export default {
         vertical-align: middle;
     .cardList
       .card
-        height: 80rpx;
-        line-height: 80rpx;
+        height: 100rpx;
+        line-height: 100rpx;
+        text-indent: 40rpx;
         border-bottom: 2rpx solid #f2f2f2;
 </style>

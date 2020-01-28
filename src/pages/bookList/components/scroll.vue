@@ -35,6 +35,10 @@ export default {
           subjectName: '数学',
           subjectPort: 'math',
           btnClass: 'subject-item'
+        },{
+          subjectName: '计算机',
+          subjectPort: 'computer',
+          btnClass: 'subject-item'
         }
       ]
     }

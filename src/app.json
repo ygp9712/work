@@ -1,15 +1,16 @@
 {
   "pages": [
-    "pages/getPaper/main",
+    "pages/personalPage/main",
     "pages/index/main",
+    "pages/personal/main",
+    "pages/getPaper/main",
     "pages/bookList/main",
     "pages/articleList/main",
-    "pages/personal/main",
     "pages/paper/main",
     "pages/paperList/main",
     "pages/detail/main",
-    "pages/article/main",
-    "pages/firstView/main"
+    "pages/article/main"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
