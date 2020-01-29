@@ -25,16 +25,21 @@
       </p>
       <p class="des-content" v-html="bookItem.content"></p>
     </div>
+    <collection :isLike="this.$mp.query.isLike" :mark="this.$mp.query.mark"></collection>
   </div>
 </template>
 
 <script>
+import collection from '../../assets/common/collection.vue';
 import request from '../../utils/request';
 export default {
   data() {
     return {
       bookItem: {}
     }
+  },
+  components: {
+    collection
   },
   async mounted () {
     let result = await request('/getBook', {id : this.$mp.query.id, subject : this.$mp.query.subject});

@@ -17,8 +17,7 @@ export default {
     }
   },
   methods:{
-    async goPaper (paper, index) {
-      await request('/addHistory', {item_id : index, item_type: 'paper', item_class : this.$mp.query.port})
+    goPaper (paper, index) {
       wx.navigateTo({
         url:'/pages/paper/main?paper=' + JSON.stringify(paper)
       })

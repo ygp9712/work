@@ -8,13 +8,18 @@
     <div class="content-wrapper">
       <p class="content" v-html="article.content"></p>
     </div>
+    <collection :isLike="this.$mp.query.isLike" :mark="this.$mp.query.mark"></collection>
   </div>
 </template>
 
 <script>
 import request from '../../utils/request';
+import collection from '../../assets/common/collection';
 export default {
   name: 'Article',
+  components: {
+    collection: collection
+  },
   data() {
     return {
       article: {}

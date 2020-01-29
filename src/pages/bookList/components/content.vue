@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="book-items">
-      <div class="book" v-for="(item, index) of bookList" :key="index" @click="toDetail(item.id)">
+      <div class="book" v-for="(item, index) of bookList" :key="index" @click="toDetail(item.id, item.title)">
         <div class="img">
           <img class="book-img" mode="widthFix" :src="item.src" alt="">
         </div>
@@ -29,10 +29,11 @@ export default {
     }
   },
   methods: {
-    async toDetail (id) {
-      await request('/addHistory', {item_id : id, item_type: 'book', item_class : this.subject})
+    async toDetail (id, title) {
+      let mark = await request('/addHistory', {item_id : id, item_name: title,item_type: 'book', item_class : this.subject})
+      let isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : this.subject});
       wx.navigateTo({
-        url:`/pages/detail/main?id=${id}&subject=${this.subject}`
+        url: `/pages/detail/main?id=${id}&subject=${this.subject}&mark=${mark}&isLike=${isLike}`
       })
     },
     async getList() {

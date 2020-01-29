@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="list">
-      <div class="listItem"  v-for="(item,index) of papersItem" :key="index" @click="toPaperList(item.port)">
+      <div class="listItem"  v-for="(item,index) of papersItem" :key="index" @click="toPaperList(item)">
         <div class="item-content">
           {{item.title}}
         </div></div>
@@ -38,9 +38,10 @@ export default {
     }
   },
   methods: {
-    toPaperList (port) {
+    async toPaperList (item) {
+      await request('/addHistory', {item_id : 'null', item_name : item.title,item_type: 'paper', item_class : item.port})
       wx.navigateTo({
-        url: `/pages/paperList/main?port=${port}`
+        url: `/pages/paperList/main?port=${item.port}`
       })
     }
   },

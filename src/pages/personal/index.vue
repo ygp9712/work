@@ -46,7 +46,9 @@ export default {
       console.log(this.userInfo);
     },
     async goHistory () {
-
+      wx.navigateTo({
+        url: `/pages/personalPage/main`
+      })
     }
   }
 }

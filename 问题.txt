@@ -9,3 +9,5 @@
 5、div内设置未知宽高的img居中：使用relative&absolute，且图片top：50%，left：50%，加上transform: translate(-50%,-50%)(重要）
 
 6、不同页面data会数据复用而不是每个页面有单独的data实例（在unLoad钩子进行一些处理）
+
+7、v-for嵌套列表需要指定不同的index

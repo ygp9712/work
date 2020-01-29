@@ -11,10 +11,67 @@ class Mysql {
   constructor () {
 
   }
+  
+  insertLike (user_id, item_id, item_name, item_type, item_class, time) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO collection ( user_id, item_id, item_name, item_type, item_class, time ) VALUES(?, ?, ?, ?, ?, ?)`;
+      let insertSql_Params = [user_id, item_id, item_name, item_type, item_class, time];
+      pool.query(insertSql, insertSql_Params, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  queryLike (user_id, item_id, item_type, item_class) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id FROM collection WHERE user_id='${user_id}' AND item_id='${item_id}' AND item_type='${item_type}' AND item_class='${item_class}'`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  deleteLike (id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`DELETE FROM collection WHERE id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  personalHistory (user_id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT * FROM history WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
 
   deleteHistory (id) {
     return new Promise((resolve, reject) => {
       pool.query(`DELETE FROM history WHERE id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+  
+  queryHistoryById(id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT * FROM history WHERE id=${id}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -34,10 +91,10 @@ class Mysql {
     })
   }
 
-  insertHistory (user_id, item_id, item_type, item_class, time) {
+  insertHistory (user_id, item_id, item_name, item_type, item_class, time) {
     return new Promise((resolve, reject) => {
-      let insertSql = `INSERT INTO history ( user_id, item_id, item_type, item_class, time ) VALUES(?, ?, ?, ?, ?)`;
-      let insertSql_Params = [user_id, item_id, item_type, item_class, time];
+      let insertSql = `INSERT INTO history ( user_id, item_id, item_name, item_type, item_class, time ) VALUES(?, ?, ?, ?, ?, ?)`;
+      let insertSql_Params = [user_id, item_id, item_name, item_type, item_class, time];
       pool.query(insertSql, insertSql_Params, function (error, results, fields) {
           if (error) {
               throw error

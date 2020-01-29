@@ -5,7 +5,7 @@
     </div>
     <div class="bookList">
       <div class="list">
-        <div @click="toDetail(item.id, item.subject)" class="bookItem" v-for="(item, index) of booksArr" :key="index" >
+        <div @click="toDetail(item.id, item.title,item.subject)" class="bookItem" v-for="(item, index) of booksArr" :key="index" >
           <img :src="item.src" alt="">
           <p class="bookTitle">{{item.title}}</p>
           <p class="bookWriter">{{item.writer}}</p>
@@ -46,10 +46,11 @@ export default {
     }
   },
   methods: {
-    async toDetail (id, subject) {
-      await request('/addHistory', {item_id : id, item_type: 'book', item_class : subject})
+    async toDetail (id, title, subject) {
+      let mark = await request('/addHistory', {item_id : id, item_name: title, item_type: 'book', item_class : subject})
+      let isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : subject});
       wx.navigateTo({
-        url:`/pages/detail/main?id=${id}&subject=${subject}`
+        url:`/pages/detail/main?id=${id}&subject=${subject}&mark=${mark}&isLike=${isLike}`
       })
     },
     toBookList () {

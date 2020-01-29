@@ -21,7 +21,7 @@ export default {
         wx.setStorageSync('token', token);
       }
     })
-   
+  
     //测试地址token
     let result = await request('/test');
     console.log('验证结果:', result);

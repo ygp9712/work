@@ -15,6 +15,40 @@ router.get('/',async (ctx, next) => {
     ctx.body = "这里是wxapp服务器3000";
 })
 
+router.get('/checkLike', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let item_id = ctx.query.item_id;
+  let item_type = ctx.query.item_type;
+  let item_class = ctx.query.item_class;
+  let isLike = await mysql.queryLike(user_id, item_id, item_type, item_class);
+  ctx.body = isLike[0].id;
+})
+
+router.get('/addLike', async (ctx, next) => {
+  let id = ctx.query.id;
+  let item = await mysql.queryHistoryById(id);
+  let result = await mysql.insertLike(item[0].user_id, item[0].item_id, item[0].item_name, item[0].item_type, item[0].item_class, item[0].time);
+  /* console.log(result); */
+  ctx.body = result.insertId;
+})
+
+router.get('/deleteLike', async (ctx, next) => {
+  let id = ctx.query.id;
+  let result = await mysql.deleteLike(id);
+  ctx.body = result;
+})
+
+/*=============================      历史记录接口      ==============================*/
+router.get('/personalHistory', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let history = await mysql.personalHistory(user_id);
+  ctx.body = history;
+})
+
 router.get('/queryHistory', async(ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
@@ -23,7 +57,6 @@ router.get('/queryHistory', async(ctx, next) => {
   let item_type = ctx.query.item_type;
   let item_class = ctx.query.item_class;
   let answer = await mysql.queryHistory(user_id, item_id, item_type, item_class);
-  console.log(answer);
   ctx.body = answer;
 })
 
@@ -32,6 +65,7 @@ router.get('/addHistory', async (ctx, next) => {
   let decoded = jwt.verify(token, 'yangguo');
   let user_id = decoded.openid;
   let item_id = ctx.query.item_id;
+  let item_name = ctx.query.item_name;
   let item_type = ctx.query.item_type;
   let item_class = ctx.query.item_class;
   let time = decoded.iat;
@@ -40,11 +74,13 @@ router.get('/addHistory', async (ctx, next) => {
   {
     await mysql.deleteHistory(query[0].id)
   }
-  let answer = await mysql.insertHistory(user_id, item_id, item_type, item_class, time);
-  console.log(answer);
-  ctx.body = answer;
+  let answer = await mysql.insertHistory(user_id, item_id, item_name, item_type, item_class, time);
+  ctx.body = answer.insertId;
 })
+/*=============================      历史记录接口      ==============================*/
 
+
+/*--------------------------        图书接口       -----------------------------*/
 router.get('/getBook', async(ctx, next) => {
   let id = ctx.query.id;
   let subject = ctx.query.subject;
@@ -57,7 +93,9 @@ router.get('/getBookList', async (ctx,next) => {
   let data = await mysql.queryBookList(subject);
   ctx.body = data;
 })
+/*--------------------------        图书接口       -----------------------------*/
 
+/*=============================      文章接口      ==============================*/
 router.get('/getArticleList', async(ctx, next) => {
   let listName = ctx.query.listName;
   let page = ctx.query.page;
@@ -87,8 +125,9 @@ router.get('/testArticle',async (ctx, next) => {
     ctx.body = '没有找到';
   }
 })
+/*=============================      文章接口      ==============================*/
 
-
+/*--------------------------        试卷接口       -----------------------------*/
 router.get('/getPaperList', (ctx, next) => {
   // 1. 获取请求的参数
   let port = ctx.query.port;
@@ -98,6 +137,20 @@ router.get('/getPaperList', (ctx, next) => {
   console.log(datas)
   ctx.body = datas;
 })
+ /**
+ * 检查答案正确的接口
+ */
+router.get('/checkAnswer', (ctx, next) => {
+  // ctx是上下文对象，取代express中的req和res
+  // 1. 获取请求的参数
+  let paper = ctx.query.paper
+  // 2. 根据请求的地址和参数处理数据
+  let datas = require('../datas/answer/' + paper + '.json')
+  console.log(datas)
+  // 3. 响应数据
+  ctx.body = datas
+})
+/*--------------------------        试卷接口       -----------------------------*/
 
 /**
  * 获取用户openId的接口
@@ -141,18 +194,5 @@ router.get('/test', (ctx, next) => {
     ctx.body = '验证失败'
   }
   
- /**
- * 检查答案正确的接口
- */
-  router.get('/checkAnswer', (ctx, next) => {
-    // ctx是上下文对象，取代express中的req和res
-    // 1. 获取请求的参数
-    let paper = ctx.query.paper
-    // 2. 根据请求的地址和参数处理数据
-    let datas = require('../datas/answer/' + paper + '.json')
-    console.log(datas)
-    // 3. 响应数据
-    ctx.body = datas
-  })
 })
 module.exports = router

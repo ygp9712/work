@@ -109,7 +109,7 @@ export default {
     async handleFinish () {
       try{
       //检查单选有没有做完
-       for(let i=0;i<this.paper.singleChoice.length;i++){
+      for(let i=0;i<this.paper.singleChoice.length;i++){
         if (this.answer.single[i] === undefined)
         error("没有做完！");
       }

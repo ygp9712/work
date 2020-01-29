@@ -7,7 +7,6 @@
     </swiper>
     <index-icon></index-icon>
     <index-book></index-book>
-    
   </div>
 </template>
 
@@ -25,9 +24,8 @@ export default {
         src: '/static/imgs/test1.png'
       },{
         src: '/static/imgs/test2.png'
-      },{
-        src: '/static/imgs/test3.png'
-      }]
+      }
+      ]
     }
   },
   methods: {
