@@ -8,10 +8,10 @@
       <div class="card">
         待做事务
       </div>
-      <div class="card">
+      <div class="card" @click="goPage('Collection', '我的收藏')">
         我的收藏
       </div>
-      <div class="card" @click="goHistory()">
+      <div class="card" @click="goPage('History', '历史记录')">
         历史记录
       </div>
       
@@ -45,9 +45,9 @@ export default {
       }
       console.log(this.userInfo);
     },
-    async goHistory () {
+    goPage (to, name) {
       wx.navigateTo({
-        url: `/pages/personalPage/main`
+        url: `/pages/personalPage/main?to=${to}&name=${name}`
       })
     }
   }

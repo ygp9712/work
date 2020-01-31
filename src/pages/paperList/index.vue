@@ -23,7 +23,7 @@ export default {
       })
     }
   },
-  async mounted () {
+  async onShow () {
     let port = this.$mp.query.port;
     let result = await request('/getPaperList', {port: port});
     wx.setNavigationBarTitle({

@@ -41,11 +41,13 @@ export default {
   components: {
     collection
   },
+  onShow() {
+    console.log(this.$mp.query.mark);
+  },
   async mounted () {
+    /* console.log(this.$mp.query.mark); */
     let result = await request('/getBook', {id : this.$mp.query.id, subject : this.$mp.query.subject});
     this.bookItem = result[0];
-    console.log(result);
-    console.log(this.bookItem);
     wx.setNavigationBarTitle({
       title: this.bookItem.title
     })

@@ -32,9 +32,11 @@ export default {
     async toDetail (id, title) {
       let mark = await request('/addHistory', {item_id : id, item_name: title,item_type: 'book', item_class : this.subject})
       let isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : this.subject});
-      wx.navigateTo({
-        url: `/pages/detail/main?id=${id}&subject=${this.subject}&mark=${mark}&isLike=${isLike}`
-      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: `/pages/detail/main?id=${id}&subject=${this.subject}&mark=${mark}&isLike=${isLike}`
+        })
+      }, 0);
     },
     async getList() {
       let result = await request('/getBookList', {subject : this.subject});

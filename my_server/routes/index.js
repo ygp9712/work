@@ -15,6 +15,14 @@ router.get('/',async (ctx, next) => {
     ctx.body = "这里是wxapp服务器3000";
 })
 
+router.get('/personalCollection', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let collection = await mysql.personalCollection(user_id);
+  ctx.body = collection;
+})
+
 router.get('/checkLike', async (ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
@@ -23,7 +31,11 @@ router.get('/checkLike', async (ctx, next) => {
   let item_type = ctx.query.item_type;
   let item_class = ctx.query.item_class;
   let isLike = await mysql.queryLike(user_id, item_id, item_type, item_class);
-  ctx.body = isLike[0].id;
+  let answer ='';
+  if(isLike[0]) {
+    answer = isLike[0].id;
+  }
+  ctx.body = answer;
 })
 
 router.get('/addLike', async (ctx, next) => {
@@ -75,6 +87,7 @@ router.get('/addHistory', async (ctx, next) => {
     await mysql.deleteHistory(query[0].id)
   }
   let answer = await mysql.insertHistory(user_id, item_id, item_name, item_type, item_class, time);
+  console.log(answer.insertId);
   ctx.body = answer.insertId;
 })
 /*=============================      历史记录接口      ==============================*/

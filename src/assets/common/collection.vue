@@ -12,27 +12,40 @@ export default {
   data() {
     return {
       heartClass: 'heart',
-      historyMark: this.mark,
-      likeNum: this.isLike
     }
   },
   methods: {
     async clickHeart() {
-      console.log(this.historyMark);
       if(this.heartClass === 'heart') {
-        this.likeNum = await request('/addLike', { id : this.historyMark});
-        this.heartClass = 'heart liked';
+        this.isLike = await request('/addLike', { id : this.mark});
       } else {
-        await request('/deleteLike', {id : this.likeNum});
-        this.heartClass = 'heart';
+        await request('/deleteLike', {id : this.isLike});
+        this.isLike = '';
       }
     }
   },
+  watch: {
+    mark: function () {
+      console.log(this.mark);
+    },
+    isLike: function () {
+      this.isLike == '' ? this.heartClass = 'heart' : this.heartClass = 'heart liked';
+    }
+  },
   mounted() {
-    if(this.likeNum) {
+    /* console.log(this.isLike); */
+    if(this.isLike) {
       this.heartClass = 'heart liked';
     }
   },
+  onShow() {
+    if(this.isLike) {
+      this.heartClass = 'heart liked';
+    }
+  },
+  onUnload() {
+    this.heartClass = 'heart';
+  }
 }
 </script>
 

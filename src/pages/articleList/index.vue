@@ -51,12 +51,15 @@ export default {
   },
   methods: {
     async toArticle(article) {
-      console.log(article);
+      /* console.log(article); */
       let mark = await request('/addHistory', {item_id : article.id, item_name: article.title,item_type: 'article', item_class : this.$mp.query.listName})
       let isLike = await request('/checkLike', {item_id : article.id, item_type: 'article', item_class : this.$mp.query.listName});
-      wx.navigateTo({
-        url:`/pages/article/main?table=${this.$mp.query.listName}&id=${article.id}&mark=${mark}&isLike=${isLike}`
-      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url:`/pages/article/main?table=${this.$mp.query.listName}&id=${article.id}&mark=${mark}&isLike=${isLike}`
+        })
+      }, 0);
+      
     },
     async toBackPage(){
       console.log('上一页');
