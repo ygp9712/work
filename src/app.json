@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/todoList/main",
     "pages/index/main",
     "pages/personalPage/main",
     "pages/getPaper/main",

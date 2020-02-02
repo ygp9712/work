@@ -11,7 +11,7 @@
           <p class="bookWriter">{{item.writer}}</p>
         </div>
         <div class="bookitem more" @click="toBookList()">
-          更多
+          更多👉
         </div>
       </div>
     </div>

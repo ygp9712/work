@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" @click="clickHeart()">
-    <p :class="heartClass">&#10084;</p>
+    <p :class="heartClass"><span class="iconfont iconaixin_shixin"></span></p>
   </div>
 </template>
 
@@ -64,9 +64,10 @@ export default {
       position: absolute;
       top: 50%;
       left: 50%;
-      font-size: 80rpx;
       color: #eaeaea;
       transform: translate(-50%,-50%);
     .liked
       color: red;
+    .iconaixin_shixin
+      font-size: 80rpx;
 </style>

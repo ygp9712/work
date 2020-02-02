@@ -92,7 +92,7 @@ export default {
               display: block;
               width: 100%;
               height: 100rpx;
-              font-size: 38rpx;
+              font-size: 37rpx;
               overflow: hidden
               text-overflow: ellipsis
             .book-writer 
