@@ -15,6 +15,31 @@ router.get('/',async (ctx, next) => {
     ctx.body = "这里是wxapp服务器3000";
 })
 
+
+/*=============================      事务接口      ==============================*/
+router.get('/personalTodo', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let affair = await mysql.personalTodo(user_id);
+  ctx.body = affair;
+})
+
+router.get('/addTodo', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let name = ctx.query.name;
+  let time = ctx.query.time;
+  let place = ctx.query.place;
+  let detail = ctx.query.detail;
+  let result = await mysql.insertTodo(user_id, name, time, place, detail);
+  /* console.log(result); */
+  ctx.body = result.insertId;
+})
+/*=============================      事务接口      ==============================*/
+
+/*--------------------------        收藏接口       -----------------------------*/
 router.get('/personalCollection', async (ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
@@ -51,6 +76,8 @@ router.get('/deleteLike', async (ctx, next) => {
   let result = await mysql.deleteLike(id);
   ctx.body = result;
 })
+/*--------------------------        收藏接口       -----------------------------*/
+
 
 /*=============================      历史记录接口      ==============================*/
 router.get('/personalHistory', async (ctx, next) => {

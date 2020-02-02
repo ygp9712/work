@@ -12,6 +12,30 @@ class Mysql {
 
   }
   
+  personalTodo (user_id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT * FROM todolist WHERE user_id='${user_id}'  LIMIT 0,10`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  insertTodo (user_id, name, time, place, detail) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO todolist ( user_id, name, time, place, detail ) VALUES(?, ?, ?, ?, ?)`;
+      let insertSql_Params = [user_id, name, time, place, detail];
+      pool.query(insertSql, insertSql_Params, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
   personalCollection (user_id) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT * FROM collection WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {

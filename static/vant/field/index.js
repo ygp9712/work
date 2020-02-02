@@ -90,7 +90,7 @@ VantComponent({
             this.$emit('blur', event.detail);
         },
         onClickIcon() {
-            this.$emit('click-icon');
+            this.$emit('clickIcon');
         },
         onClear() {
             this.setData({ value: '' });

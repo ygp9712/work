@@ -1,10 +1,12 @@
 { 
+  "navigationBarTitleText": "待做事务",
   "usingComponents": {
-      "van-button": "/static/vant/button/index",
       "van-cell": "/static/vant/cell/index",
       "van-cell-group": "/static/vant/cell-group/index",
       "van-popup": "/static/vant/popup/index",
       "van-field": "/static/vant/field/index",
-      "van-datetime-picker": "/static/vant/datetime-picker/index"
+      "van-overlay": "/static/vant/overlay/index",
+      "van-datetime-picker": "/static/vant/datetime-picker/index",
+      "van-swipe-cell": "/static/vant/swipe-cell/index"
   }
 }

@@ -50,8 +50,8 @@
                       :value="choose.name">
               <span>{{arr[index_]}}、</span>{{choose.value}}
             </checkbox>
-           </checkbox-group>
-           <div class="prompt-wrapper">
+          </checkbox-group>
+          <div class="prompt-wrapper">
             <div class="static" v-bind:class="[{right: item.right}, {wrong: !item.right}]" v-if="correctAnswer.multi">
                 <div>你的答案：
                   <span class="multi-answer" v-for="(answer, index__) of answer.multi[index]" :key="index__">
