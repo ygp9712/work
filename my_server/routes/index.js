@@ -221,7 +221,7 @@ router.get('/getOpenId', async (ctx, next) => {
   let appSecret = 'dfa6bb6b4061b178516a2644f9bdc791'
   // 2. 根据请求的地址和参数处理数据
   let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${appSecret}&js_code=${code}&grant_type=authorization_code`
-  // 发送请求给微信接口，获取openId
+  // 使用fly发送请求给微信接口，获取openId
   let result = await fly.get(url)
   let userInfo = JSON.parse(result.data)
   /*   console.log(userInfo) */

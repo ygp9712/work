@@ -63,9 +63,6 @@ page {
 .iconaixin_shixin:before {
   content: "\e602";
 }
-
-
-
 /*
   使用阿里Iconfont
   */
