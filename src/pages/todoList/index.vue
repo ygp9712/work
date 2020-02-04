@@ -1,20 +1,19 @@
 <template>
   <div class="container">
     <div class="affair-list">
-      <van-swipe-cell class="affair" :left-width="65" :right-width="65"  v-for="(item, index) of affairList" :key="index">
-        <div class="swipe-left" slot="left">选择</div>
-        <div class="content">
+      <van-swipe-cell class="affair" :left-width="150" :right-width="150"  v-for="(item, index) of affairList" :key="index">
+        <div class="swipe-left" slot="left" @click="finishAffair(item.id, index)">完成</div>
+        <div :class="affairClass[item.finish]" @click="clickAffair(item)">
           <p class="affair-name">
             {{item.name}}
           </p>
           <p class="affair-place">
             {{item.place}}
           </p>
-          <span class="affair-time">
-            {{item.time}}
+          <span class="affair-time" v-html="item.untill">
           </span>
         </div>
-        <div class="swipe-right" slot="right">删除</div>
+        <div class="swipe-right" slot="right" @click="deleteAffair(item.id, index)">删除</div>
       </van-swipe-cell>
     </div>
 
@@ -70,19 +69,31 @@
         :max-date="maxDate"
       />
     </van-popup>
+
+    <van-dialog use-slot :show="isShowDialog" @close="closeAffair">
+      <van-cell-group>
+        <van-cell title="名称" :value="dialogContent.name" />
+        <van-cell title="时间" :value="dialogContent.time" />
+        <van-cell title="地点" :value="dialogContent.place" />
+        <van-cell title="备注" :label="dialogContent.detail" />
+      </van-cell-group>
+    </van-dialog>
   </div>
 </template>
 
 <script>
 import request from '../../utils/request';
-import format from '../../utils/formatDateStr';
+import handleTime from '../../utils/handleTime';
 export default {
   name: 'todoList',
   data() {
     return {
       affairList: [],
+      affairClass: ['content','content finish'],
       addShow: false,
       isShowDatetime: false,
+      isShowDialog: false,
+      dialogContent: {},
       addName: '',
       addTime: '',
       addPlace: '',
@@ -94,11 +105,32 @@ export default {
     }
   },
   methods: {
+    async finishAffair(id, index) {
+      let toggle = this.affairList[index].finish;
+      if(toggle === 1) {
+        await request('/updateTodo', {id : id, finish : 0});
+        this.affairList[index].finish = 0;
+      } else {
+        await request('/updateTodo', {id : id, finish : 1});
+        this.affairList[index].finish = 1;
+      }
+    },
+    async deleteAffair (id, index) {
+      await request('/deleteTodo', {id: id});
+      this.affairList.splice(index,1);
+    },
+    clickAffair (item) {
+      this.dialogContent = item;
+      this.isShowDialog = true;
+    },
+    closeAffair () {
+      this.isShowDialog = false;
+    },
     clickTime() {
       this.isShowDatetime = true;
     },
     onDateConfirm (e) {
-        let time = format(new Date(e.mp.detail));
+        let time = handleTime.formatDateStr(new Date(e.mp.detail));
         this.addTime = time;
         this.isShowDatetime = false;
         this.$emit('onConfirm', {value: this.addTime, time: e.mp.detail})
@@ -121,7 +153,15 @@ export default {
         this.wrongText = '你的日期输入有误!'
         return 
       }
-      let result =  await request('/addTodo', {name: this.addName, time: this.addTime, place: this.addPlace, detail: this.addDetail});
+      let insertId =  await request('/addTodo', {name: this.addName, time: this.addTime, place: this.addPlace, detail: this.addDetail});
+      let inserted = await request('/queryTodo', {id : insertId});
+      let untillTime = new Date(inserted.time).getTime() - this.currentDate;
+      if (untillTime < 0){
+        inserted.untill = '已结束';
+      } else {
+        inserted.untill = handleTime.formatDuring(untillTime);
+      }
+      this.affairList.splice(this.affairList.length,0,inserted);
       this.addShow = false;
       this.addName = '';
       this.addTime = '';
@@ -147,28 +187,42 @@ export default {
   async onShow() {
     let result = await request('/personalTodo');
     this.affairList = result;
-    console.log(result);
+    this.affairList.forEach(element => {
+      let untillTime = new Date(element.time).getTime() - this.currentDate;
+      if (untillTime < 0){
+        element.untill = '已结束';
+      } else {
+        element.untill = handleTime.formatDuring(untillTime);
+      }
+    });
   }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .container
+    .van-swipe-cell__left,
+    .van-swipe-cell__right {
+      display: inline-block;
+      width: 150rpx;
+      height: 150rpx;
+      font-size: 15px;
+      line-height: 150rpx;
+      color: #fff;
+      text-align: center;
+    }
     .affair-list
       .affair
-        .van-swipe-cell__left
-          display: inline-block;
-          width: 65rpx;
-          line-height: 150rpx;
-          color: #ffffff;
-          text-align: center;
+        .swipe-left
           background: green;
+        .swipe-right
+          background: red;
         .content
           position: relative;
           display: inline-block;
           width: 100%;
           height: 150rpx;
-          background: #f2f2f2;
+          background: #ffffff;
           .affair-name
             margin-top: 20rpx;
             margin-left: 20rpx;
@@ -184,6 +238,10 @@ export default {
             font-size: 40rpx;
             color: red;
             transform: translate(0, -50%);
+        .finish
+          background: #f2f2f2;
+          opacity: 0.4;
+          filter: grayscale(100%);
     .add-affair
       position: relative;
       display: block;

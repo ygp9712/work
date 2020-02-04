@@ -56,7 +56,7 @@ VantComponent({
         },
         swipeMove(offset = 0) {
             this.offset = range(offset, -this.data.rightWidth, this.data.leftWidth);
-            const transform = `translate3d(${this.offset}px, 0, 0)`;
+            const transform = `translate3d(${this.offset}rpx, 0, 0)`;
             const transition = this.dragging
                 ? 'none'
                 : 'transform .6s cubic-bezier(0.18, 0.89, 0.32, 1)';

@@ -1,4 +1,4 @@
-1、爬取网页时querySelectorAll获取的DOM元素无法被console出来，只能console获取出来的子元素例如href。
+1、爬取网页时querySelectorAll获取的DOM元素无法被console出来，只能console获取出来的子元素例如href。（puppeteer问题)
 
 2、mysql查询语句limit n,m(第几个查起，查几个)
 
@@ -21,3 +21,13 @@
 11、不能使用click-icon这种类型的监听方法，需要手动将vant源码换成驼峰表示法.
 
 12、vant的Field不会自动双向绑定，需要@change手动绑定
+
+13、使用vant-weapp组件的外部样式类时必须去掉vue组件style标签的scoped属性，否则外部样式无法起作用。（例如swipeCell的左右拉动区域）
+
+14、swipeCell绑定的left-width和right-width是px单位，需要手动修改源码
+
+15、需要触发的事件例如bind:clickIcon需要写成@clickIcon
+
+16、触底刷新使用onReachBottom( )方法
+
+17、{{}}模板中无法使用method中的方法。

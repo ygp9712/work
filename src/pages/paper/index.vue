@@ -70,7 +70,6 @@
         <!-- 多选模块结束 -->
       </div>
       <button class="finish-button" type="primary" @click="handleFinish">提交</button>
-      <button class="next-button" type="default">下一模块</button>
       <div class="modal" v-if="modalShow">
         <div class="close" @click="closeModal">X</div>
         <div class="pic-wrapper">

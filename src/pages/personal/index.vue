@@ -5,7 +5,7 @@
       <button open-type="getUserInfo" @getuserinfo="handleGetUserInfo">{{userInfo.nickName ? userInfo.nickName : '登录'}}</button>
     </div>
     <div class="cardList">
-      <div class="card">
+      <div class="card" @click="goTodo()">
         待做事务
       </div>
       <div class="card" @click="goPage('Collection', '我的收藏')">
@@ -48,6 +48,11 @@ export default {
     goPage (to, name) {
       wx.navigateTo({
         url: `/pages/personalPage/main?to=${to}&name=${name}`
+      })
+    },
+    goTodo () {
+      wx.navigateTo({
+        url: '/pages/todoList/main'
       })
     }
   }

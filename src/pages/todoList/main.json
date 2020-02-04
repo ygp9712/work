@@ -7,6 +7,7 @@
       "van-field": "/static/vant/field/index",
       "van-overlay": "/static/vant/overlay/index",
       "van-datetime-picker": "/static/vant/datetime-picker/index",
-      "van-swipe-cell": "/static/vant/swipe-cell/index"
+      "van-swipe-cell": "/static/vant/swipe-cell/index",
+      "van-dialog": "/static/vant/dialog/index"
   }
 }

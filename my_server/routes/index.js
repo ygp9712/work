@@ -17,6 +17,25 @@ router.get('/',async (ctx, next) => {
 
 
 /*=============================      事务接口      ==============================*/
+router.get('/queryTodo', async(ctx, next) => {
+  let id = ctx.query.id;
+  let answer = await mysql.queryTodo(id);
+  ctx.body = answer[0];
+})
+
+router.get('/deleteTodo', async(ctx, next) => {
+  let id = ctx.query.id;
+  let answer = await mysql.deleteTodo(id);
+  ctx.body = answer;
+})
+
+router.get('/updateTodo', async (ctx,next) => {
+  let id = ctx.query.id;
+  let finish = ctx.query.finish;
+  await mysql.updateTodo(id, finish);
+  ctx.body = '更新'
+})
+
 router.get('/personalTodo', async (ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');

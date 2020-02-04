@@ -11,10 +11,42 @@ class Mysql {
   constructor () {
 
   }
+  queryTodo(id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,name,time,place,detail,finish FROM todolist WHERE id='${id}'`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  deleteTodo(id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`DELETE FROM todolist WHERE id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  updateTodo(id, finish) {
+    return new Promise((resolve, reject) => {
+      pool.query(`UPDATE todolist set finish=${finish} WHERE id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
   
   personalTodo (user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM todolist WHERE user_id='${user_id}'  LIMIT 0,10`, function (error, results, fields) {
+      pool.query(`SELECT id,name,time,place,detail,finish FROM todolist WHERE user_id='${user_id}'  LIMIT 0,10`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -38,7 +70,7 @@ class Mysql {
 
   personalCollection (user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM collection WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM collection WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -84,7 +116,7 @@ class Mysql {
 
   personalHistory (user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM history WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM history WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -106,7 +138,7 @@ class Mysql {
   
   queryHistoryById(id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM history WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM history WHERE id=${id}`, function (error, results, fields) {
           if (error) {
               throw error
           };
