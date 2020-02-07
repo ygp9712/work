@@ -8,7 +8,7 @@
 <script>
 import request from './utils/request';
 export default {
-  async mounted () {
+  /* async mounted () {
     wx.login({
       success: async (res) => {
         //console.log(res);
@@ -25,8 +25,7 @@ export default {
     //测试地址token
     let result = await request('/test');
     console.log('验证结果:', result);
-
-  }
+  } */
 }
 </script>
 

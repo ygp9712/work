@@ -2,6 +2,8 @@
 
 导入mysql表;
 
+npm install 安装相关依赖
+
 设置src/utils/config.js里的host为本机地址；
 
 自定义my_server/config.js里的mysql设置；

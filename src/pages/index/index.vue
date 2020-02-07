@@ -21,9 +21,9 @@ export default {
   data () {
     return {
       swiperArr: [{
-        src: '/static/imgs/test1.png'
+        src: '/static/imgs/swipe1.jpg'
       },{
-        src: '/static/imgs/test2.png'
+        src: '/static/imgs/swipe2.jpg'
       }
       ]
     }

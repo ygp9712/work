@@ -216,6 +216,7 @@ router.get('/checkAnswer', (ctx, next) => {
  */
 router.get('/getOpenId', async (ctx, next) => {
   // 1. 获取请求的参数
+  console.log('1');
   let code = ctx.query.code // ctx = request
   let appId = 'wxe7c5868e5a98f48d'
   let appSecret = 'dfa6bb6b4061b178516a2644f9bdc791'
@@ -244,14 +245,12 @@ router.get('/test', (ctx, next) => {
   try {
     console.log(decoded)
     ctx.body = '验证成功'
-  // session_key: 'u2HnCyPbGqx1LMAabD7VWw==',
-  // openid: 'oswh55DzTf_I8ZfQk_e1ep59hQcM',
-  // iat: 1574770777  iat是加密时的时间
   } catch (e) {
     decoded = false
     console.log('token验证失败！', e)
     ctx.body = '验证失败'
   }
-  
 })
+
+
 module.exports = router
