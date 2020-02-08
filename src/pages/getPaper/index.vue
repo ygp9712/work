@@ -14,6 +14,7 @@ import request from '../../utils/request';
 export default {
   data () {
     return {
+      isLogin: '',
       papersItem: [
       {
         title: '政治',
@@ -39,14 +40,16 @@ export default {
   },
   methods: {
     async toPaperList (item) {
-      await request('/addHistory', {item_id : 'null', item_name : item.title,item_type: 'paper', item_class : item.port})
+      if (this.isLogin) {
+        await request('/addHistory', {item_id : 'null', item_name : item.title,item_type: 'paper', item_class : item.port})
+      }
       wx.navigateTo({
         url: `/pages/paperList/main?port=${item.port}`
       })
     }
   },
-  mounted () {
-
+  onShow () {
+    this.isLogin = wx.getStorageSync('token');
   },
 }
 </script>

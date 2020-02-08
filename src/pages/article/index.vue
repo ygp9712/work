@@ -8,7 +8,7 @@
     <div class="content-wrapper">
       <p class="content" v-html="article.content"></p>
     </div>
-    <collection :isLike="this.$mp.query.isLike" :mark="this.$mp.query.mark"></collection>
+    <collection :isLike="this.$mp.query.isLike" :mark="this.$mp.query.mark" :isLogin="this.$mp.query.isLogin"></collection>
   </div>
 </template>
 

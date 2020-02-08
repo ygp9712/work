@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" @click="clickHeart()">
+  <div class="wrapper" @click="clickHeart()" v-if="isLogin">
     <p :class="heartClass"><span class="iconfont iconaixin_shixin"></span></p>
   </div>
 </template>
@@ -8,7 +8,7 @@
 import request from '../../utils/request';
 export default {
   name: 'collection',
-  props: [ 'isLike', 'mark' ],
+  props: [ 'isLike', 'mark' , 'isLogin' ],
   data() {
     return {
       heartClass: 'heart',
@@ -17,6 +17,7 @@ export default {
   methods: {
     async clickHeart() {
       if(this.heartClass === 'heart') {
+        console.log(this.mark);
         this.isLike = await request('/addLike', { id : this.mark});
       } else {
         await request('/deleteLike', {id : this.isLike});

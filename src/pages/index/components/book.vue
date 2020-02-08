@@ -24,6 +24,7 @@ export default {
   name: 'IndexBook',
   data() {
     return {
+      isLogin: '',
       booksArr: [{
         src: 'http://img10.360buyimg.com/n1/jfs/t1/36854/19/1565/207321/5cb3e59dEa8f397ca/f3ce691a81601d88.jpg',
         title: '2021考研英语红宝书考研英语词汇',
@@ -45,15 +46,31 @@ export default {
       }]
     }
   },
+  mounted() {
+    this.isLogin = wx.getStorageSync('token');
+    console.log(this.isLogin);
+  },
+  onShow() {
+    this.isLogin = wx.getStorageSync('token');
+    console.log(this.isLogin);
+  },
   methods: {
     async toDetail (id, title, subject) {
-      let mark = await request('/addHistory', {item_id : id, item_name: title, item_type: 'book', item_class : subject})
-      let isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : subject});
+      let mark,isLike;
+      if(this.isLogin){
+        mark = await request('/addHistory', {item_id : id, item_name: title, item_type: 'book', item_class : subject})
+        isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : subject});
+      }
       setTimeout(() => {
-        /* console.log(mark); */
-        wx.navigateTo({
-          url:`/pages/detail/main?id=${id}&subject=${subject}&mark=${mark}&isLike=${isLike}`
-        })
+        if(this.isLogin) {
+          wx.navigateTo({
+            url:`/pages/detail/main?id=${id}&subject=${subject}&mark=${mark}&isLike=${isLike}&isLogin=${this.isLogin}`
+          }) 
+        } else {
+          wx.navigateTo({
+            url:`/pages/detail/main?id=${id}&subject=${subject}&isLogin=${this.isLogin}`
+          })
+        }
       }, 0);
     },
     toBookList () {

@@ -20,6 +20,7 @@ export default {
   name: 'ArticleList',
   data() {
     return {
+      isLogin: '',
       articleList: [],
       page: 1,
       maxPage: 0,
@@ -30,10 +31,11 @@ export default {
       rightClass: 'button'
     }
   },
-  async mounted () {
+  async onShow () {
     wx.setNavigationBarTitle({
       title: this.$mp.query.name
     }) 
+    this.isLogin = wx.getStorageSync('token');
     let result =  await request('/getArticleList', {listName: this.$mp.query.listName, page: this.page});
     let result2 = await request('/getArticleListMax', {listName: this.$mp.query.listName});
     this.articleList = result;
@@ -52,12 +54,21 @@ export default {
   methods: {
     async toArticle(article) {
       /* console.log(article); */
-      let mark = await request('/addHistory', {item_id : article.id, item_name: article.title,item_type: 'article', item_class : this.$mp.query.listName})
-      let isLike = await request('/checkLike', {item_id : article.id, item_type: 'article', item_class : this.$mp.query.listName});
+      let mark, isLike;
+      if(this.isLogin) {
+        mark = await request('/addHistory', {item_id : article.id, item_name: article.title,item_type: 'article', item_class : this.$mp.query.listName})
+        isLike = await request('/checkLike', {item_id : article.id, item_type: 'article', item_class : this.$mp.query.listName});
+      }
       setTimeout(() => {
-        wx.navigateTo({
-          url:`/pages/article/main?table=${this.$mp.query.listName}&id=${article.id}&mark=${mark}&isLike=${isLike}`
-        })
+        if(this.isLogin) {
+          wx.navigateTo({
+            url:`/pages/article/main?table=${this.$mp.query.listName}&id=${article.id}&mark=${mark}&isLike=${isLike}&isLogin=${this.isLogin}`
+          })
+        } else  {
+          wx.navigateTo({
+            url:`/pages/article/main?table=${this.$mp.query.listName}&id=${article.id}&isLogin=${this.isLogin}`
+          })
+        }
       }, 0);
       
     },

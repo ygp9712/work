@@ -24,18 +24,29 @@ export default {
   name: 'ListContent',
   data() {
     return {
+      isLogin: '',
       bookList: [],
       subject: 'english'
     }
   },
   methods: {
     async toDetail (id, title) {
-      let mark = await request('/addHistory', {item_id : id, item_name: title,item_type: 'book', item_class : this.subject})
-      let isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : this.subject});
+      let mark, isLike;
+      if (this.isLogin) {
+        console.log('添加历史记录');
+        mark = await request('/addHistory', {item_id : id, item_name: title,item_type: 'book', item_class : this.subject});
+        isLike = await request('/checkLike', {item_id : id, item_type: 'book', item_class : this.subject});
+      }
       setTimeout(() => {
-        wx.navigateTo({
-          url: `/pages/detail/main?id=${id}&subject=${this.subject}&mark=${mark}&isLike=${isLike}`
-        })
+        if (this.isLogin){
+          wx.navigateTo({
+            url: `/pages/detail/main?id=${id}&subject=${this.subject}&mark=${mark}&isLike=${isLike}&isLogin=${this.isLogin}`
+          })
+        } else {
+          wx.navigateTo({
+            url: `/pages/detail/main?id=${id}&subject=${this.subject}&isLogin=${this.isLogin}`
+          })
+        }
       }, 0);
     },
     async getList() {
@@ -43,15 +54,18 @@ export default {
       this.bookList = result;
     }
   },
-  async mounted() {
+  mounted() {
     Bus.$on('scrollClick', (port) => {
       this.subject = port;
-      console.log(this.subject);
       this.getList();
     })
     this.getList();
-    console.log(this.bookList);
+    this.isLogin = wx.getStorageSync('token');
   },
+  onShow () {
+    this.getList();
+    this.isLogin = wx.getStorageSync('token');
+  }
 }
 </script>
 

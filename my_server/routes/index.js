@@ -85,6 +85,7 @@ router.get('/checkLike', async (ctx, next) => {
 router.get('/addLike', async (ctx, next) => {
   let id = ctx.query.id;
   let item = await mysql.queryHistoryById(id);
+  console.log(item);
   let result = await mysql.insertLike(item[0].user_id, item[0].item_id, item[0].item_name, item[0].item_type, item[0].item_class, item[0].time);
   /* console.log(result); */
   ctx.body = result.insertId;

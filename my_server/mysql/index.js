@@ -138,7 +138,7 @@ class Mysql {
   
   queryHistoryById(id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM history WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`SELECT id,user_id,item_id,item_name,item_type,item_class,time FROM history WHERE id=${id}`, function (error, results, fields) {
           if (error) {
               throw error
           };

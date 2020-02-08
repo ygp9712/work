@@ -3,7 +3,7 @@
     <div :class="pageClass[showCover]">
       <div class="header">
         <img :src="userInfo.avatarUrl ? userInfo.avatarUrl : '/static/imgs/personal.png'" alt="">
-        <div class="user-name">用户名字</div>
+        <div class="user-name">{{userInfo.nickName ? userInfo.nickName : '用户名字'}}</div>
       </div>
       <div class="card-list">
         <div class="card" @click="goTodo()">
@@ -99,10 +99,13 @@ export default {
           vertical-align: middle;
           border-radius: 50rpx;
           //放在父元素的垂直中间
-        button 
+        .user-name 
           display: inline-block;
           height: 60rpx;
           line-height: 60rpx;
+          padding: 0 10rpx;
+          border-radius: 10rpx;
+          background: #ffffff;
           margin-left: 40rpx;
           max-width: 200rpx;
           vertical-align: middle;
