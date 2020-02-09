@@ -29,19 +29,19 @@ export default {
         src: 'http://img10.360buyimg.com/n1/jfs/t1/36854/19/1565/207321/5cb3e59dEa8f397ca/f3ce691a81601d88.jpg',
         title: '2021考研英语红宝书考研英语词汇',
         writer: '考研英语命题研究组',
-        id: 1,
+        id: 4,
         subject: 'english'
       },{
         src: 'http://img10.360buyimg.com/n1/jfs/t1/101845/15/10913/332723/5e21aed7E7c2a7158/d2b2f851e26dc933.jpg',
         title: '张宇考研数学(2021)36讲+1000题（数一）',
         writer: '张宇',
-        id: 1,
+        id: 6,
         subject: 'math'
       },{
         src: 'http://img3m6.ddimg.cn/53/21/28485026-1_u_3.jpg',
         title: '2021肖秀荣考研政治知识点精讲精练',
         writer: '肖秀荣',
-        id: 1,
+        id: 7,
         subject: 'politics'
       }]
     }

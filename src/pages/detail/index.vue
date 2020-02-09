@@ -25,11 +25,14 @@
       </p>
       <p class="des-content" v-html="bookItem.content"></p>
     </div>
+    <book-comment :isLogin="this.$mp.query.isLogin" :bookId="bookItem.id" :bookTitle="bookItem.title"></book-comment>    
+
     <collection :isLike="this.$mp.query.isLike" :mark="this.$mp.query.mark" :isLogin="this.$mp.query.isLogin"></collection>
   </div>
 </template>
 
 <script>
+import bookComment from './components/comment.vue';
 import collection from '../../assets/common/collection.vue';
 import request from '../../utils/request';
 export default {
@@ -39,21 +42,21 @@ export default {
     }
   },
   components: {
-    collection
+    collection,
+    bookComment
   },
   onShow() {
-    console.log(this.$mp.query.mark);
   },
   async mounted () {
-    /* console.log(this.$mp.query.mark); */
     let result = await request('/getBook', {id : this.$mp.query.id, subject : this.$mp.query.subject});
     this.bookItem = result[0];
+    /* console.log(this.bookItem); */
     wx.setNavigationBarTitle({
       title: this.bookItem.title
     })
   },
   onShareAppMessage (event) {
-    console.log(event);
+    /* console.log(event); */
     //若要自定义转发内容，需要return对象
     return {
       title: '你的书店',

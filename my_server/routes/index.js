@@ -14,6 +14,24 @@ router.get('/',async (ctx, next) => {
   // ctx是上下文对象，取代express中的req和res
     ctx.body = "这里是wxapp服务器3000";
 })
+/*--------------------------        评论接口       -----------------------------*/
+router.get('/getComment', async (ctx,next) => {
+  console.log(ctx.query.bookId);
+  let list = await mysql.queryCommentList(ctx.query.bookId);
+  console.log(list);
+  ctx.body = list;
+})
+
+router.get('/addComment', async (ctx,next) => {
+  let x = ctx.query;
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let answer = await mysql.insertComment(x.bookId, x.bookTitle, decoded.openid, x.avatarUrl, x.nickName, x.gender, x.comment, x.time);
+  ctx.body = answer;
+})
+
+/*--------------------------        评论接口       -----------------------------*/
+
 
 
 /*=============================      事务接口      ==============================*/

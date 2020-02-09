@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/personal/main",
     "pages/index/main",
+    "pages/personal/main",
     "pages/personalPage/main",
     "pages/todoList/main",
     "pages/getPaper/main",

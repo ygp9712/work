@@ -11,6 +11,30 @@ class Mysql {
   constructor () {
 
   }
+  queryCommentList(bookid) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT user_avatar,user_nickname,user_gender,content,time FROM comment WHERE book_id='${bookid}' ORDER BY id DESC`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  insertComment (book_id, book_title, user_id, user_avatar, user_nickname, user_gender, content, time) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO comment ( book_id, book_title, user_id, user_avatar, user_nickname, user_gender, content, time ) VALUES(?, ?, ?, ?, ?, ? , ?, ?) `;
+      let insertSql_Params = [book_id, book_title, user_id, user_avatar, user_nickname, user_gender, content, time];
+      pool.query(insertSql, insertSql_Params, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
   queryTodo(id) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT id,name,time,place,detail,finish FROM todolist WHERE id='${id}'`, function (error, results, fields) {
@@ -171,9 +195,9 @@ class Mysql {
     })
   }
 
-  queryBook (id, database) {
+  queryBook (id, subject) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,src,year,price,title,writer,publisher,authContent,content from subject_${database} WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`SELECT id,src,year,price,title,writer,publisher,authContent,content from books WHERE id=${id} AND subject='${subject}'`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -182,9 +206,9 @@ class Mysql {
     })
   }
 
-  queryBookList (database) {
+  queryBookList (subject) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,src,title,writer,publisher from subject_${database} ORDER BY id DESC`, function (error, results, fields) {
+      pool.query(`SELECT id,src,title,writer,publisher from books WHERE subject='${subject}' ORDER BY id DESC`, function (error, results, fields) {
           if (error) {
               throw error
           };
