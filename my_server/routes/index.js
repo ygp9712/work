@@ -15,6 +15,14 @@ router.get('/',async (ctx, next) => {
     ctx.body = "这里是wxapp服务器3000";
 })
 /*--------------------------        评论接口       -----------------------------*/
+router.get('/personalComment', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let result = await mysql.personalComment(user_id);
+  ctx.body = result;
+})
+
 router.get('/getComment', async (ctx,next) => {
   console.log(ctx.query.bookId);
   let list = await mysql.queryCommentList(ctx.query.bookId);

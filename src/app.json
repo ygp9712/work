@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/main",
     "pages/personal/main",
+    "pages/index/main",
     "pages/personalPage/main",
     "pages/todoList/main",
     "pages/getPaper/main",
@@ -10,8 +10,8 @@
     "pages/paper/main",
     "pages/paperList/main",
     "pages/detail/main",
-    "pages/article/main"
-    
+    "pages/article/main",
+    "pages/comment/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

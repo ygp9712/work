@@ -11,6 +11,17 @@ class Mysql {
   constructor () {
 
   }
+  personalComment (user_id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT book_id,book_title,content,time FROM comment WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
   queryCommentList(bookid) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT user_avatar,user_nickname,user_gender,content,time FROM comment WHERE book_id='${bookid}' ORDER BY id DESC`, function (error, results, fields) {

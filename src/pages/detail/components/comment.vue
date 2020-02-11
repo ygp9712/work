@@ -50,14 +50,11 @@ export default {
       await request('/addComment', {bookId: this.bookId, bookTitle: this.bookTitle,avatarUrl: this.userInfo.avatarUrl, nickName: this.userInfo.nickName, gender: this.userInfo.gender, comment: this.comment, time})
       this.bookComment.splice(0,0,{user_avatar: this.userInfo.avatarUrl, user_nickname: this.userInfo.nickName, user_gender: this.userInfo.gender, content: this.comment, time: this.currentDate, before: '0秒'})
       this.comment = '';
-      console.log(this.bookId);
     },
     async getComment() {
-      console.log(this.bookId);
       this.bookComment = await request('/getComment', {bookId: this.bookId});
       this.bookComment.forEach(element => {
         let beforeTime = this.currentDate - element.time;
-        console.log(beforeTime);
         element.before = handleTime.formatBefore(beforeTime);
       });
     }
@@ -66,7 +63,7 @@ export default {
     /* this.getComment(); */
     if (this.isLogin) {
       this.userInfo = wx.getStorageSync('userInfo');
-      console.log(this.userInfo);
+      console.log('已登录');
     }
   },
   watch: {

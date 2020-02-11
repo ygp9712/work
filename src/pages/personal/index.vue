@@ -6,6 +6,9 @@
         <div class="user-name">{{userInfo.nickName ? userInfo.nickName : '用户名字'}}</div>
       </div>
       <div class="card-list">
+        <div class="card" @click="goMyComment()">
+          我的评论
+        </div>
         <div class="card" @click="goTodo()">
           待做事务
         </div>
@@ -76,6 +79,11 @@ export default {
     goTodo () {
       wx.navigateTo({
         url: '/pages/todoList/main'
+      })
+    },
+    goMyComment () {
+      wx.navigateTo({
+        url: '/pages/comment/main'
       })
     }
   }
