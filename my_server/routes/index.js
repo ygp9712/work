@@ -6,20 +6,37 @@ const router = new KoaRouter()
 var Fly = require('flyio/src/node')
 var fly = new Fly()
 var jwt = require('jsonwebtoken')
+var fs = require('fs')
+var path = require('path')
+var mime = require('mime');
 const mysql = require('../mysql')
 
+render = function (fileName, ctx) {
+  var content = fs.readFileSync(fileName);
+  ctx.set('Content-Type', mime.getType(fileName));
+  ctx.body = content;
+} 
 //=================编写的接口=================
   // 核心代码
 router.get('/',async (ctx, next) => {
   // ctx是上下文对象，取代express中的req和res
-    ctx.body = "这里是wxapp服务器3000";
+  render(path.join(path.resolve('./'), 'pages', 'index.html'), ctx)
 })
 /*--------------------------        评论接口       -----------------------------*/
+router.get('/getCommentMax', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.queryCommentMax(user_id);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 8);
+})
+
 router.get('/personalComment', async (ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
   let user_id = decoded.openid;
-  let result = await mysql.personalComment(user_id);
+  let page = ctx.query.page;
+  let result = await mysql.personalComment(user_id, page);
   ctx.body = result;
 })
 
@@ -85,11 +102,20 @@ router.get('/addTodo', async (ctx, next) => {
 /*=============================      事务接口      ==============================*/
 
 /*--------------------------        收藏接口       -----------------------------*/
+router.get('/getCollectionMax', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.queryCollectionMax(user_id);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 8);
+})
+
 router.get('/personalCollection', async (ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
   let user_id = decoded.openid;
-  let collection = await mysql.personalCollection(user_id);
+  let page = ctx.query.page;
+  let collection = await mysql.personalCollection(user_id, page);
   ctx.body = collection;
 })
 
@@ -124,14 +150,33 @@ router.get('/deleteLike', async (ctx, next) => {
 })
 /*--------------------------        收藏接口       -----------------------------*/
 
+router.get('/deletePersonal', async (ctx, next) => {
+  let type = ctx.query.type;
+  let id = ctx.query.id;
+  if(type === 'Collection') {
+    await mysql.deleteLike(id);
+  } else {
+    await mysql.deleteHistory(id);
+  }
+  ctx.body = 'over';
+} )
 
 /*=============================      历史记录接口      ==============================*/
 router.get('/personalHistory', async (ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
   let user_id = decoded.openid;
-  let history = await mysql.personalHistory(user_id);
+  let page = ctx.query.page;
+  let history = await mysql.personalHistory(user_id, page);
   ctx.body = history;
+})
+
+router.get('/getHistoryMax', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.queryHistoryMax(user_id);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 8);
 })
 
 router.get('/queryHistory', async(ctx, next) => {

@@ -11,9 +11,22 @@ class Mysql {
   constructor () {
 
   }
-  personalComment (user_id) {
+  queryCommentMax (user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT book_id,book_title,content,time FROM comment WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+      pool.query(`SELECT  count(*) FROM comment WHERE user_id='${user_id}'`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+  
+  personalComment (user_id, page) {
+    let num = 8;
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT book_id,book_title,content,time FROM comment WHERE user_id='${user_id}' ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -102,10 +115,23 @@ class Mysql {
       });
     })
   }
-
-  personalCollection (user_id) {
+  
+  queryCollectionMax (user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM collection WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+      pool.query(`SELECT  count(*) FROM collection WHERE user_id='${user_id}'`, function (error, results, fields) {
+        if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  personalCollection (user_id, page) {
+    let num = 8;
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM collection WHERE user_id='${user_id}' ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -148,10 +174,23 @@ class Mysql {
       });
     })
   }
-
-  personalHistory (user_id) {
+  
+  queryHistoryMax (user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM history WHERE user_id='${user_id}' ORDER BY id DESC LIMIT 0,10`, function (error, results, fields) {
+      pool.query(`SELECT  count(*) FROM history WHERE user_id='${user_id}'`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  personalHistory (user_id, page) {
+    let num = 8;
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,item_id,item_name,item_type,item_class,time FROM history WHERE user_id='${user_id}' ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };

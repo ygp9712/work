@@ -130,6 +130,7 @@ export default {
           right: 20rpx;
     .pagination
       margin-top: 60rpx;
+      padding-bottom: 60rpx;
       width: 100%;
       display: inline-block;
       text-align: center;

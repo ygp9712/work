@@ -13,6 +13,11 @@
         </span>
       </div>
     </div>
+    <div class="pagination" v-if="maxPage != 1">
+      <div :class="leftClass" @click="toBackPage()">上一页</div>
+      <span class="page">{{page}} / {{maxPage}}</span>
+      <div :class="rightClass" @click="toNextPage()">下一页</div>
+    </div>
   </div>
 </template>
 
@@ -23,17 +28,69 @@ export default {
   name: 'comment',
   data() {
     return {
-      currentDate: new Date().getTime(),
-      commentList: []
+      currentTime: '',
+      commentList: [],
+      page: 1,
+      maxPage: 0,
+      leftClass: 'button disable',
+      rightClass: 'button'
+    }
+  },
+  methods: {
+    async toBackPage() {
+      if (this.page === 1) return
+        this.page--;
+        if (this.page === 1) {
+          this.leftClass = 'button disable';
+        }
+        if (this.rightClass === 'button disable') {
+          this.rightClass = 'button';
+        }
+        let result = await request('/personalComment', {page: this.page});
+        this.commentList = result;
+        this.commentList.forEach(element => {
+          let beforeTime = this.currentTime - element.time;
+          element.before = handleTime.formatBefore(beforeTime);
+        });
+        wx.pageScrollTo({
+          scrollTop: 0
+        })
+    },
+    async toNextPage() {
+      console.log('下一页');
+        if (this.page === this.maxPage) return
+        if (this.page === 1) {
+          this.leftClass = 'button';
+        }
+        this.page++;
+        if (this.page === this.maxPage) {
+          this.rightClass = 'button disable'
+        }
+        let result = await request('/personalComment', {page: this.page});
+        this.commentList = result;
+        this.commentList.forEach(element => {
+          let beforeTime = this.currentTime - element.time;
+          element.before = handleTime.formatBefore(beforeTime);
+        });
+        wx.pageScrollTo({
+          scrollTop: 0
+        })
     }
   },
   async onShow() {
-    let result = await request('/personalComment');
+    this.maxPage = await request('/getCommentMax');
+    let result = await request('/personalComment', {page : 1});
     this.commentList = result;
     this.commentList.forEach(element => {
-        let beforeTime = this.currentDate - element.time;
+        let beforeTime = this.currentTime - element.time;
         element.before = handleTime.formatBefore(beforeTime);
     });
+    this.currentTime = new Date().getTime();
+  },
+  onUnload() {
+    this.page = 1;
+    this.leftClass = 'button disable';
+    this.rightClass = 'button';
   }
 }
 </script>
@@ -69,4 +126,27 @@ export default {
           font-size: 26rpx;
           right: -140rpx;
           color: 	#0000CD;
+    .pagination
+      margin-top: 60rpx;
+      padding-bottom: 60rpx;
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      .page
+        font-size: 30rpx;
+        padding: 0 20rpx;
+      .button
+        display: inline-block;
+        width: 200rpx;
+        height: 80rpx;
+        text-align: center;
+        line-height: 80rpx;
+        color: #ffffff;
+        font-size: 34rpx;
+        background: #1b644a;
+        line-height: 80rpx;
+        border: 2rpx solid #f2f2f2
+        border-radius: 16rpx;
+      .disable
+        background: #eaeaea;
 </style>
