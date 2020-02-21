@@ -26,9 +26,11 @@ const handleList = require('./helper/handleList');
   list.splice(10, 99);
 
   list.forEach(async item => {
-    let table = 'adjust';
-    console.log(item);
-    await handleList(item, table)
+    if(!item.indexOf('https://yz.chsi.com.cn')){
+      let table = 'adjust';
+      console.log(item);
+      await handleList(item, table)
+    }
   })
  
   await browser.close();

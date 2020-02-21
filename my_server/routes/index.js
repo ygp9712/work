@@ -22,6 +22,24 @@ router.get('/',async (ctx, next) => {
   // ctx是上下文对象，取代express中的req和res
   render(path.join(path.resolve('./'), 'pages', 'index.html'), ctx)
 })
+
+/*=============================      问答接口      ==============================*/
+router.get('/clickQuestion', async(ctx, next) => {
+  await mysql.clickQuestion(ctx.query.id);
+  ctx.body = 'done';
+})
+
+router.get('/getQuestion', async(ctx, next) => {
+  let data = await mysql.queryQuestion(ctx.query.id);
+  ctx.body = data[0];
+})
+
+router.get('/getQuestionList', async(ctx, next) => {
+  let data = await mysql.queryQuestionAll()
+  ctx.body = data;
+})
+/*=============================      问答接口      ==============================*/
+
 /*--------------------------        评论接口       -----------------------------*/
 router.get('/getCommentMax', async(ctx, next) => {
   let token = ctx.request.header.authorization;

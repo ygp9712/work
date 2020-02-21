@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/question/main",
+    "pages/questionPage/main",
     "pages/personal/main",
     "pages/index/main",
     "pages/personalPage/main",
@@ -27,18 +29,23 @@
     "list": [{
       "pagePath": "pages/index/main",
       "text": "首页",
-      "iconPath": "/static/imgs/icon1.png",
-      "selectedIconPath": "/static/imgs/icon-active-1.png"
+      "iconPath": "/static/tabs/icon1.png",
+      "selectedIconPath": "/static/tabs/icon-active-1.png"
+    },{
+      "pagePath": "pages/question/main",
+      "text": "问答",
+      "iconPath": "/static/tabs/icon2.png",
+      "selectedIconPath": "/static/tabs/icon-active-2.png"
     },{
       "pagePath": "pages/getPaper/main",
       "text": "做题",
-      "iconPath": "/static/imgs/icon2.png",
-      "selectedIconPath": "/static/imgs/icon-active-2.png"
+      "iconPath": "/static/tabs/icon3.png",
+      "selectedIconPath": "/static/tabs/icon-active-3.png"
     },{
       "pagePath": "pages/personal/main",
       "text": "个人中心",
-      "iconPath": "/static/imgs/icon3.png",
-      "selectedIconPath": "/static/imgs/icon-active-3.png"
+      "iconPath": "/static/tabs/icon4.png",
+      "selectedIconPath": "/static/tabs/icon-active-4.png"
     }],
     "position": "bottom"
   }

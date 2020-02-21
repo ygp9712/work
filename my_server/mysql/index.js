@@ -11,6 +11,41 @@ class Mysql {
   constructor () {
 
   }
+  queryQuestion (id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT * FROM question WHERE id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  clickQuestion(id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`UPDATE question set visitNum=visitNum+1 where id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+  queryQuestionAll () {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,replyNum,visitNum,title FROM question`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
   queryCommentMax (user_id) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT  count(*) FROM comment WHERE user_id='${user_id}'`, function (error, results, fields) {

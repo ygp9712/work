@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="comment-list">
-      <div class="comment-item" v-for="(item, index) of commentList" :key="index">
+      <div class="comment-item" @longpress="longPress" v-for="(item, index) of commentList" :key="index">
         <p class="comment-content">
           {{item.content}}
         </p>
@@ -28,7 +28,7 @@ export default {
   name: 'comment',
   data() {
     return {
-      currentTime: '',
+      currentTime: new Date().getTime(),
       commentList: [],
       page: 1,
       maxPage: 0,
@@ -37,6 +37,9 @@ export default {
     }
   },
   methods: {
+    longPress(e) {
+      console.log(e);
+    },
     async toBackPage() {
       if (this.page === 1) return
         this.page--;

@@ -27,9 +27,11 @@ const handleList = require('./helper/handleList');
 
  
   list.forEach(async item => {
-    let table = 'country';
-    console.log(item);
-    await handleList(item, table)
+    if(!item.indexOf('https://yz.chsi.com.cn')){
+      let table = 'country';
+      console.log(item);
+      await handleList(item, table)
+    }
   })
  
   await browser.close();

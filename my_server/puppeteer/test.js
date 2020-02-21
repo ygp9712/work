@@ -27,9 +27,7 @@ const handleList = require('./helper/handleList');
   console.log(list);
   list.forEach(async item => {
     if(!item.indexOf('https://yz.chsi.com.cn')){
-      let table = 'college'
       console.log(item);
-      await handleList(item, table);
     }
   })
  
