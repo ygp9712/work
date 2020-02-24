@@ -5,9 +5,12 @@
     </span>
     <p class="user-info">
       <img :src="item.avatarUrl" alt="" class="user-avatar"/>
-      <span class="user-nickname">{{item.nickname}}</span>
-      <span class="time"></span>
+      <span class="user-nickname">{{item.nickName}}&nbsp&nbsp&nbsp&nbsp</span>
+      <span class="time">{{item.time}}</span>
     </p>
+    <span class="question-content">
+      {{item.content}}
+    </span>
   </div>
 </template>
 
@@ -20,7 +23,7 @@ export default {
       item: {}
     }
   },
-  async onLoad() {
+  async onShow() {
     this.item = await request('/getQuestion', { id: this.$mp.query.id })
     console.log(this.item);
   }
@@ -34,6 +37,8 @@ export default {
       font-weight: bold;
       font-size: 40rpx;
     .user-info
+      margin-top: 20rpx;
+      margin-bottom: 20rpx;
       .user-avatar
         width: 80rpx;
         height: 80rpx;
@@ -41,4 +46,7 @@ export default {
       .user-nickname
         font-size: 30rpx;
         margin-left: 20rpx;
+    .question-content
+      font-size: 32rpx;
+      color: #458B74;
 </style>

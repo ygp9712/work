@@ -11,6 +11,19 @@ class Mysql {
   constructor () {
 
   }
+  insertQuestion (nickName, avatarUrl, title, content, time) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO question ( nickName, avatarUrl, title, content, time ) VALUES(?, ?, ?, ?, ?) `;
+      let insertSql_Params = [nickName, avatarUrl, title, content, time];
+      pool.query(insertSql, insertSql_Params, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
   queryQuestion (id) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT * FROM question WHERE id=${id}`, function (error, results, fields) {
@@ -36,7 +49,7 @@ class Mysql {
   }
   queryQuestionAll () {
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,replyNum,visitNum,title FROM question`, function (error, results, fields) {
+      pool.query(`SELECT id,replyNum,visitNum,title FROM question ORDER BY id DESC`, function (error, results, fields) {
           if (error) {
               throw error
           };

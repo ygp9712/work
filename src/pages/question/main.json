@@ -1,0 +1,9 @@
+{ 
+  "navigationBarTitleText": "问答专区",
+  "usingComponents": {
+      "van-popup": "/static/vant/popup/index",
+      "van-field": "/static/vant/field/index",
+      "van-overlay": "/static/vant/overlay/index",
+      "van-dialog": "/static/vant/dialog/index"
+  }
+}

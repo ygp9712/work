@@ -24,6 +24,16 @@ router.get('/',async (ctx, next) => {
 })
 
 /*=============================      问答接口      ==============================*/
+router.get('/addQuestion', async(ctx, next) => {
+  let nickName = ctx.query.nickName;
+  let avatarUrl = ctx.query.avatarUrl;
+  let title = ctx.query.title;
+  let content = ctx.query.content;
+  let time = ctx.query.time;
+  let answer = await mysql.insertQuestion(nickName, avatarUrl, title, content, time);
+  ctx.body = answer;
+})
+
 router.get('/clickQuestion', async(ctx, next) => {
   await mysql.clickQuestion(ctx.query.id);
   ctx.body = 'done';
