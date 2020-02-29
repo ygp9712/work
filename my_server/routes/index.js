@@ -24,13 +24,54 @@ router.get('/',async (ctx, next) => {
 })
 
 /*=============================      问答接口      ==============================*/
+router.get('/getQReplyList', async(ctx, next) => {
+  let id = ctx.query.id;
+  let data = await mysql.queryQReplyList(id);
+  ctx.body = data;
+})
+
+router.get('/addQReply', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let question_id = ctx.query.question_id;
+  let comment_id = ctx.query.comment_id;
+  let user_id = decoded.openid;
+  let nickName = ctx.query.nickName;
+  let content = ctx.query.content;
+  let time = ctx.query.time;
+  let answer = await mysql.insertQReply(question_id,comment_id,user_id,nickName/* ,toUser */,content,time)
+  await mysql.addQCommentNum(question_id);
+  ctx.body = answer;
+})
+
+router.get('/getQCommentList', async(ctx, next) => {
+  let id = ctx.query.id;
+  let data = await mysql.queryQCommentList(id);
+  ctx.body = data;
+})
+router.get('/addQComment', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let question_id = ctx.query.question_id;
+  let user_id = decoded.openid; 
+  let avatarUrl = ctx.query.avatarUrl;
+  let nickName = ctx.query.nickName;
+  let content = ctx.query.content;
+  let time = ctx.query.time;
+  let answer = await mysql.insertQComment(question_id, user_id, nickName, avatarUrl, content, time);
+  await mysql.addQCommentNum(question_id);
+  ctx.body = answer;
+})
 router.get('/addQuestion', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let nickName = ctx.query.nickName;
   let avatarUrl = ctx.query.avatarUrl;
   let title = ctx.query.title;
   let content = ctx.query.content;
   let time = ctx.query.time;
-  let answer = await mysql.insertQuestion(nickName, avatarUrl, title, content, time);
+  let answer = await mysql.insertQuestion(user_id, nickName, avatarUrl, title, content, time);
   ctx.body = answer;
 })
 

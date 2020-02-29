@@ -77,7 +77,7 @@ export default {
       await request('/clickQuestion', { id: e.id })
       console.log(e);
       wx.navigateTo({
-        url: `/pages/questionPage/main?id=${e.id}`
+        url: `/pages/questionPage/main?id=${e.id}&isLogin=${this.isLogin}`
       })
     },
     closeDialog(){

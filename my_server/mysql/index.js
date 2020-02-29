@@ -11,10 +11,72 @@ class Mysql {
   constructor () {
 
   }
-  insertQuestion (nickName, avatarUrl, title, content, time) {
+  queryQReplyList (id) {
     return new Promise((resolve, reject) => {
-      let insertSql = `INSERT INTO question ( nickName, avatarUrl, title, content, time ) VALUES(?, ?, ?, ?, ?) `;
-      let insertSql_Params = [nickName, avatarUrl, title, content, time];
+      pool.query(`SELECT id,question_id,comment_id,nickName,content,time FROM question_reply WHERE comment_id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  insertQReply (question_id, comment_id, user_id, nickName, /* toUser, */  content, time) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO question_reply ( question_id, comment_id, user_id, nickName,  content, time ) VALUES(?, ?, ?, ?, ?, ?) `;
+      let insertSql_Params = [question_id, comment_id, user_id, nickName, /* toUser, */  content, time];
+      pool.query(insertSql, insertSql_Params, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  addQCommentNum (id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`UPDATE question set replyNum=replyNum+1 where id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  queryQCommentList (id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,question_id,avatarUrl,nickName,content,time,likeNum FROM question_comment WHERE question_id=${id}`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
+
+  insertQComment (question_id, user_id, nickName, avatarUrl,  content, time) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO question_comment ( question_id, user_id, nickName, avatarUrl, content, time ) VALUES(?, ?, ?, ?, ?, ?) `;
+      let insertSql_Params = [question_id, user_id, nickName, avatarUrl, content, time];
+      pool.query(insertSql, insertSql_Params, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
+
+  insertQuestion (user_id, nickName, avatarUrl, title, content, time) {
+    return new Promise((resolve, reject) => {
+      let insertSql = `INSERT INTO question ( user_id, nickName, avatarUrl, title, content, time ) VALUES(?, ?, ?, ?, ?, ?) `;
+      let insertSql_Params = [user_id, nickName, avatarUrl, title, content, time];
       pool.query(insertSql, insertSql_Params, function (error, results, fields) {
           if (error) {
               throw error
