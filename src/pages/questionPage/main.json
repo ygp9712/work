@@ -1,0 +1,7 @@
+{ 
+  "navigationBarTitleText": "问题详情",
+  "usingComponents": {
+      "van-popup": "/static/vant/popup/index",
+      "van-dialog": "/static/vant/dialog/index"
+  }
+}

@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/index/main",
+    "pages/personal/main",
+    "pages/personalQR/main",
     "pages/question/main",
     "pages/questionPage/main",
-    "pages/personal/main",
-    "pages/index/main",
     "pages/personalPage/main",
     "pages/todoList/main",
     "pages/getPaper/main",

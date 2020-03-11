@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <div class="bar">
-      推荐图书
+      <span class="icontushuqikan iconfont"></span>推荐图书
     </div>
     <div class="bookList">
       <div class="list">
@@ -92,6 +92,8 @@ export default {
     color: #ffffff;
     border-bottom: 4rpx solid #f2f2f2;
     box-shadow: 2px 2px 2px #f2f2f2;
+    .iconfont 
+      margin-right: 10px;
   .bookList
     .list
       display: flex;

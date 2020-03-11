@@ -1,9 +1,12 @@
 <template>
   <div class="container">
+    <div class="search">
+      <input class="search-input" type="text" placeholder="请输入文章的关键字" placeholder-class="iconfont iconshenglvehao" name="keyword">
+    </div>
     <div class="list">
       <div class="list-item" v-for="(item, index) of articleList" :key="index" @click="toArticle(item)">
         <p class="item-title" v-html="item.title"></p>
-        <span class="item-time">{{item.time}}</span>
+        <p class="item-time">{{item.time}}</p>
       </div>
     </div>
     <div class="pagination" v-if="multiPage">
@@ -110,24 +113,31 @@ export default {
 
 <style lang="stylus" scoped>
   .container
+    .search
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      background: #6e9175;
+      width: 100%;
+      .search-input
+        height: 30px;
+        border-radius: 5px;
+        background: #ffffff;
+        width: 90%;
     .list
       .list-item
-        position: relative;
-        height: 200rpx;
-        line-height: 200rpx
+        padding: 30px 5px;
         border-bottom: 2rpx solid #f2f2f2;
         box-shadow: 2px 2px 2px #eaeaea;
         .item-title
           display: inline-block;
-          line-height: 36rpx;
-          vertical-align: middle;
           font-size: 36rpx;
         .item-time
           position: absolute;
+          margin-top: 5px;
+          right: 0px;
           font-size: 30rpx;
           color: #D3D3D3;
-          bottom: -60rpx;
-          right: 20rpx;
     .pagination
       margin-top: 60rpx;
       padding-bottom: 60rpx;

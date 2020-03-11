@@ -24,6 +24,62 @@ router.get('/',async (ctx, next) => {
 })
 
 /*=============================      问答接口      ==============================*/
+router.get('/otherQReply', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.otherQReply(user_id);
+  ctx.body = data;
+})
+router.get('/getQReplyMax', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.queryQReplyMax(user_id);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 6);
+})
+router.get('/personalQReply', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let page = ctx.query.page;
+  let data = await mysql.personalQReply(user_id, page);
+  ctx.body = data;
+})
+router.get('/getQCommentMax', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.queryQCommentMax(user_id);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 6);
+})
+router.get('/personalQComment' ,async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let page = ctx.query.page;
+  let data = await mysql.personalQComment(user_id, page);
+  ctx.body = data;
+})
+
+router.get('/getQuestionMax', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let data = await mysql.queryQuestionMax(user_id);
+  console.log(data);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 6);
+})
+
+router.get('/personalQuestion', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let page = ctx.query.page;
+  let data = await mysql.personalQuestion(user_id, page);
+  ctx.body = data;
+})
+
 router.get('/getQReplyList', async(ctx, next) => {
   let id = ctx.query.id;
   let data = await mysql.queryQReplyList(id);
@@ -34,12 +90,25 @@ router.get('/addQReply', async(ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
   let question_id = ctx.query.question_id;
+  let question_title = ctx.query.question_title;
   let comment_id = ctx.query.comment_id;
   let user_id = decoded.openid;
   let nickName = ctx.query.nickName;
   let content = ctx.query.content;
   let time = ctx.query.time;
-  let answer = await mysql.insertQReply(question_id,comment_id,user_id,nickName/* ,toUser */,content,time)
+  let replyTo = ctx.query.replyTo;
+  let isReturn;
+  let toUser;
+  let answer;
+  let toName = ctx.query.replyName;
+  if (replyTo === 'null') {
+    isReturn = 0;
+    toUser = await mysql.queryQCommentId(comment_id);
+  } else {
+    isReturn = 1;
+    toUser = await mysql.queryQReplyId(ctx.query.replyTo);
+  } 
+  answer = await mysql.insertQReplyTo(question_id,question_title,comment_id,user_id,nickName,toUser[0].user_id,toName,isReturn,content,time);
   await mysql.addQCommentNum(question_id);
   ctx.body = answer;
 })
@@ -53,12 +122,13 @@ router.get('/addQComment', async(ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
   let question_id = ctx.query.question_id;
+  let question_title = ctx.query.question_title;
   let user_id = decoded.openid; 
   let avatarUrl = ctx.query.avatarUrl;
   let nickName = ctx.query.nickName;
   let content = ctx.query.content;
   let time = ctx.query.time;
-  let answer = await mysql.insertQComment(question_id, user_id, nickName, avatarUrl, content, time);
+  let answer = await mysql.insertQComment(question_id, question_title,user_id, nickName, avatarUrl, content, time);
   await mysql.addQCommentNum(question_id);
   ctx.body = answer;
 })
@@ -73,6 +143,24 @@ router.get('/addQuestion', async(ctx, next) => {
   let time = ctx.query.time;
   let answer = await mysql.insertQuestion(user_id, nickName, avatarUrl, title, content, time);
   ctx.body = answer;
+})
+
+router.get('/deleteQReply', async(ctx, next) => {
+  let id = ctx.query.id;
+  await mysql.deleteQReply(id);
+  ctx.body = 'done';
+})
+
+router.get('/deleteQComment', async(ctx, next) => {
+  let id = ctx.query.id;
+  await mysql.deleteQComment(id);
+  ctx.body = 'done';
+})
+
+router.get('/deleteQuestion', async(ctx, next) => {
+  let id = ctx.query.id;
+  await mysql.deleteQuestion(id);
+  ctx.body = 'done';
 })
 
 router.get('/clickQuestion', async(ctx, next) => {

@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <div class="bar">
-      考研信息
+      <span class="iconfont iconwenzhang"></span>考研信息
     </div>
     <div class="icons">
       <div class="icon" v-for="(item, index) of buttonList" :key="index" @click="toArticleList(item.name, item.listName)">
@@ -52,6 +52,8 @@ export default {
 <style lang="stylus" scoped>
   .root
     margin-bottom: 30rpx;
+    .iconfont 
+      margin-right: 10px;
     .bar
       display: block;
       height: 100rpx;

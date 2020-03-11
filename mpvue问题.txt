@@ -1,6 +1,6 @@
 1、爬取网页时querySelectorAll获取的DOM元素无法被console出来，只能console获取出来的子元素例如href。（puppeteer问题)
 
-2、mysql查询语句limit n,m(第几个查起，查几个)
+2、mysql查询语句limit n,m(第n个查起，查m个)
 
 3、img无法动态赋值（使用require）
 
@@ -36,3 +36,13 @@
 
 19、双层v-for异步请求速度导致渲染的时候没有数据？
 ①使用轮询判断有无获取到数据，获取到再赋值②设置0.3的延迟时间等待数据
+
+20、data中的{}不等于{}，会被转化成响应式数据。
+
+21、v-for循环对象没有结果，可能是操作对象属性方法的问题？（操作对象使用this.$set 方法添加响应式数据）
+
+22、new Date(XXX) 提示NaN？说明从数据库中提取的XXX是字符串，需要转换成数字类型；
+
+23、mpvue解决事件冒泡？@click添加.stop修饰符，即@click.stop
+
+24、placeholer使用iconfont？修改placeholder-class即可

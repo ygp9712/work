@@ -4,6 +4,27 @@
       <div class="header">
         <img :src="userInfo.avatarUrl ? userInfo.avatarUrl : '/static/imgs/personal.png'" alt="">
         <div class="user-name">{{userInfo.nickName ? userInfo.nickName : '用户名字'}}</div>
+        <div style="width: 100%; text-align: center;color: yellow;">距离2020考研还有</div>
+        <div style="width: 100%; text-align: center;color: #ffffff;">{{countdown}}</div>
+      </div>
+      <div class="QR-area">
+        <div class="bar">
+          <span class="iconfont iconpinglun3"></span>我的问答
+        </div>
+        <div class="QR-items">
+          <div class="QR-question QR-item" @click="goPersonalQR('myQuestion')">
+            <span class="iconwenti iconfont"></span>
+            <p>我的提问</p>
+          </div>
+          <div class="QR-comment QR-item" @click="goPersonalQR('myReply')">
+            <span class="iconpinglun iconfont"></span>
+            <p>我的回答</p>
+          </div>
+          <div class="QR-reply QR-item" @click="goPersonalQR('otherReply')">
+            <span class="iconhuifu iconfont"></span>
+            <p>他人回复</p>
+          </div>
+        </div>
       </div>
       <div class="card-list">
         <div class="card" @click="goMyComment()">
@@ -28,12 +49,16 @@
 
 <script>
 import request from '../../utils/request';
+import handleTime from '../../utils/handleTime';
 export default {
   data () {
     return {
       userInfo: {},
       showCover: 1,
-      pageClass: ['page-wrapper', 'page-wrapper hide']
+      pageClass: ['page-wrapper', 'page-wrapper hide'],
+      countdown: '',
+      aimTime: 1608307200000,
+      timer: ''
     }
   },
   onShow () {
@@ -47,6 +72,13 @@ export default {
         console.log('获取用户信息失败');
       }
     })
+    this.timer = setInterval(() => {
+      let nowTime = new Date().getTime();
+      this.countdown = handleTime.countDown(this.aimTime - nowTime);
+    }, 1000);
+  },
+  onUnload() {
+    clearInterval(this.timer);
   },
   methods: {
     handleGetUserInfo (res) {
@@ -85,6 +117,11 @@ export default {
       wx.navigateTo({
         url: '/pages/comment/main'
       })
+    },
+    goPersonalQR(to) {
+      wx.navigateTo({
+        url: `/pages/personalQR/main?to=${to}`
+      })
     }
   }
 }
@@ -98,6 +135,7 @@ export default {
     .page-wrapper
       width: 100%;
       height: 100%;
+      font-size: 30rpx;
       .header
         padding: 40rpx;
         background: #1b644a;
@@ -117,6 +155,34 @@ export default {
           margin-left: 40rpx;
           max-width: 200rpx;
           vertical-align: middle;
+      .QR-area
+        width: 100%;
+        .bar
+          display: block;
+          height: 80rpx;
+          line-height: 80rpx;
+          text-indent: 40rpx;
+          background: #ffffff;
+          color: #008B00;
+          border-bottom: 4rpx solid #f2f2f2;
+          box-shadow: 2px 2px 2px #f2f2f2;
+          .iconfont 
+            margin-right: 10px;
+        .QR-items
+          display: flex;
+          flex-direction: row;
+          border-bottom: 4rpx solid #f2f2f2;
+          padding: 10px 0;
+          .QR-item
+            color: #008B00;
+            display: flex;
+            width: 180rpx;
+            align-items: center;
+            flex-direction: column;
+            .iconfont
+              font-size: 60rpx;
+            p
+              font-size: 24rpx;
       .card-list
         .card
           height: 100rpx;
