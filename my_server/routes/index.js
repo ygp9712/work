@@ -173,8 +173,15 @@ router.get('/getQuestion', async(ctx, next) => {
   ctx.body = data[0];
 })
 
+router.get('/getQuestionListMax', async(ctx, next) => {
+  let data = await mysql.queryQuestionListMax();
+  console.log(data);
+  ctx.body = Math.ceil(data[0]['count(*)'] / 7);
+})
+
 router.get('/getQuestionList', async(ctx, next) => {
-  let data = await mysql.queryQuestionAll()
+  let page = ctx.query.page;
+  let data = await mysql.queryQuestionAll(page);
   ctx.body = data;
 })
 /*=============================      问答接口      ==============================*/
@@ -384,6 +391,12 @@ router.get('/getBookList', async (ctx,next) => {
 /*--------------------------        图书接口       -----------------------------*/
 
 /*=============================      文章接口      ==============================*/
+router.get('/getArticleListByText', async(ctx, next) => {
+  let listName = ctx.query.listName;
+  let text = ctx.query.text;
+  let data = await mysql.queryArticleByText(listName, text);
+  ctx.body = data;
+})
 router.get('/getArticleList', async(ctx, next) => {
   let listName = ctx.query.listName;
   let page = ctx.query.page;

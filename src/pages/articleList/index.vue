@@ -1,15 +1,24 @@
 <template>
   <div class="container">
     <div class="search">
-      <input class="search-input" type="text" placeholder="请输入文章的关键字" placeholder-class="iconfont iconshenglvehao" name="keyword">
+      <input class="search-input" v-model="searchText" type="text" placeholder="请输入文章的关键字"
+              placeholder-class="iconfont iconsousuo" confirm-type="search" @confirm="handleSearch()">
+      <span class="iconfont iconchahao" @click="clearText()" v-show="searchText!= ''"></span>
+      <div class="search-confirm" @click="handleSearch()">搜索</div>
     </div>
-    <div class="list">
+    <div class="list" v-if="showSearch === false">
       <div class="list-item" v-for="(item, index) of articleList" :key="index" @click="toArticle(item)">
         <p class="item-title" v-html="item.title"></p>
         <p class="item-time">{{item.time}}</p>
       </div>
     </div>
-    <div class="pagination" v-if="multiPage">
+    <div class="search-list" v-if="showSearch === true">
+      <div class="list-item" v-for="(item_, index_) of searchList" :key="index_" @click="toArticle(item_)">
+        <p class="item-title" v-html="item_.title"></p>
+        <p class="item-time">{{item_.time}}</p>
+      </div>
+    </div>
+    <div class="pagination" v-if="multiPage&&!showSearch">
       <div :class="leftClass" @click="toBackPage()">上一页</div>
       <span class="page">{{page}} / {{maxPage}}</span>
       <div :class="rightClass" @click="toNextPage()">下一页</div>
@@ -25,6 +34,8 @@ export default {
     return {
       isLogin: '',
       articleList: [],
+      searchText: '',
+      searchList: [],
       page: 1,
       maxPage: 0,
       leftBtn: 1,
@@ -53,8 +64,27 @@ export default {
     this.page = 1;
     this.leftClass = 'button disable';
     this.rightClass = 'button';
+    this.searchText = '';
+    this.searchList = [];
+  },
+  computed: {
+    showSearch() {
+      if(this.searchText == '') {
+        return false
+      } else {
+        return true
+      }
+    }
   },
   methods: {
+    clearText() {
+      this.searchText = ''
+    },
+    async handleSearch() {
+      let data;
+      this.searchList = await request('/getArticleListByText', {listName: this.$mp.query.listName, text: this.searchText})
+      console.log(data);
+    },
     async toArticle(article) {
       /* console.log(article); */
       let mark, isLike;
@@ -102,10 +132,10 @@ export default {
         this.rightClass = 'button disable'
       }
       let result =  await request('/getArticleList', {listName: this.$mp.query.listName, page: this.page});
-        this.articleList = result;
-        wx.pageScrollTo({
-          scrollTop: 0
-        })
+      this.articleList = result;
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
     }
   }
 }
@@ -121,10 +151,26 @@ export default {
       width: 100%;
       .search-input
         height: 30px;
+        padding: 0 10px;
+        padding-right: 60rpx;
         border-radius: 5px;
         background: #ffffff;
-        width: 90%;
-    .list
+        width: 65%;
+      .iconfont
+        position: absolute;
+        right: 160rpx;
+        color: #8B7E66;
+        font-size: 55rpx;
+      .search-confirm
+        margin-left: 10px;
+        text-align: center;
+        line-height: 30px;
+        width: 50px;
+        height: 30px;
+        background: green;
+        color: #ffffff;
+        border-radius: 6px;
+    .list,.search-list
       .list-item
         padding: 30px 5px;
         border-bottom: 2rpx solid #f2f2f2;

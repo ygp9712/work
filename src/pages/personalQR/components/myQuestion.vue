@@ -83,11 +83,8 @@ export default {
     this.getQuestionList(1);
   },
   onReachBottom() {
-    console.log(this.nowPage);
-    console.log(this.maxPage);
     if(this.maxPage == this.nowPage) return;
     this.nowPage++;
-    
     this.getQuestionList(this.nowPage);
   }
 }

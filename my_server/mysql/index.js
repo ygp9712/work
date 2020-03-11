@@ -241,6 +241,18 @@ class Mysql {
       });
     })
   }
+  
+  queryQuestionListMax() {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT  count(*) FROM question`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+          // console.log('The solution is: ', results[0].solution);
+      });
+    })
+  }
 
   queryQuestion (id) {
     return new Promise((resolve, reject) => {
@@ -265,9 +277,10 @@ class Mysql {
       });
     })
   }
-  queryQuestionAll () {
+  queryQuestionAll (page) {
+    let num = 7;
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT id,replyNum,visitNum,title FROM question ORDER BY id DESC`, function (error, results, fields) {
+      pool.query(`SELECT id,replyNum,visitNum,title FROM question ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -528,6 +541,18 @@ class Mysql {
           if (error) {
               throw error
           };
+          resolve(results)
+      });
+    })
+  }
+  
+  queryArticleByText (listName, text) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT id,title,time from article_${listName} WHERE title LIKE '%${text}%' ORDER BY id DESC`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          /* console.log(`${(page-1)*num},${page*num}`) */
           resolve(results)
       });
     })

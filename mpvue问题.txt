@@ -46,3 +46,5 @@
 23、mpvue解决事件冒泡？@click添加.stop修饰符，即@click.stop
 
 24、placeholer使用iconfont？修改placeholder-class即可
+
+25、软键盘右下角的回车怎么设置？confirm-type="XXXX" @confirm="XXXXXX()"

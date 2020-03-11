@@ -3,7 +3,7 @@
     <div class="question-list">
       <div class="list-item" @click="goQuestion(item)" v-for="(item, index) of questionList" :key="index">
         {{item.title}}
-        <p class="item-num">{{item.replyNum}}回复&nbsp&nbsp&nbsp&nbsp{{item.visitNum}}浏览</p>
+        <p class="item-num">{{item.replyNum}}回复&nbsp;&nbsp;&nbsp;&nbsp;{{item.visitNum}}浏览</p>
       </div>
     </div>
     <div class="add-question" @click="addOpen()">
@@ -69,7 +69,9 @@ export default {
       addQuestion: {},
       isLogin: '',
       userInfo: {},
-      wrongText: ''
+      wrongText: '',
+      nowPage: 1,
+      maxPage: 0
     }
   },
   methods: {
@@ -121,13 +123,24 @@ export default {
     }
   },
   async onShow() {
-    this.questionList = await request('/getQuestionList');
+    this.nowPage = 1;
+    this.questionList = await request('/getQuestionList', {page: 1});
+    this.maxPage = await request('/getQuestionListMax');
     this.isLogin = wx.getStorageSync('token');
     if (this.isLogin) {
       this.userInfo = wx.getStorageSync('userInfo');
       console.log(this.userInfo);
     }
   },
+  async onReachBottom() {
+    if(this.maxPage == this.nowPage) return;
+    this.nowPage++;
+    let data = await request('/getQuestionList', {page: this.nowPage});
+    data.forEach((element) => {
+      this.questionList.push(element);
+    })
+    console.log(this.maxPage);
+  }
 }
 </script>
 
