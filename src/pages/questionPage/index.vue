@@ -12,6 +12,9 @@
       <span class="question-content">
         {{item.content}}
       </span>
+      <div class="image-area" style="margin-top: 10px;" v-if="imageList">
+        <img :src="item__" alt="" mode="aspectFit" v-for="(item__, index__) of imageList" :key="index__">
+      </div>
     </div> 
     <div class="comment-banner">
       <div class="block"></div>
@@ -90,6 +93,7 @@ export default {
   data() {
     return {
       item: {},
+      imageList: [],
       nowTime: '',
       commentList: [/* {"id":8,"question_id":20,"avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/1MKp7S9bHm1deG98aG8qJmyrNgfoboiaHZDicE4qFCh5nGLt6dheMSdV1mcsTHgB5icR4R3rRTbDy88SO8A2Zzauw/132","nickName":"鹏","content":"哇哇哇哇哇哇哇哇","time":"1582795666918","likeNum":0},
       {"id":9,"question_id":20,"avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/1MKp7S9bHm1deG98aG8qJmyrNgfoboiaHZDicE4qFCh5nGLt6dheMSdV1mcsTHgB5icR4R3rRTbDy88SO8A2Zzauw/132","nickName":"鹏","content":"问问","time":"1582795737164","likeNum":0},
@@ -212,6 +216,8 @@ export default {
     this.showReply = false;
     this.nowTime = new Date().getTime();
     this.item = await request('/getQuestion', { id: this.$mp.query.id })
+    this.item.imageArray = this.item.imageArray.replace(/\[|]/g,'').replace(/\"|"/g,'');
+    this.item.imageArray = this.item.imageArray.split(',');
     this.item.before = handleTime.formatBefore(this.nowTime - this.item.time);
     queryCommentList = await request('/getQCommentList', { id: this.item.id });
     queryCommentList.forEach(async (element) => {
@@ -243,10 +249,28 @@ export default {
       this.isLogin = true;
       /* console.log(this.userInfo); */
     }
+    if(this.item.imageArray != "") {
+      wx.cloud.init();
+      this.item.imageArray.forEach((element) => {
+        console.log(element);
+        wx.cloud.downloadFile({
+        fileID: `${element}`
+        }).then(res => {
+          // get temp file path
+          this.imageList.push(res.tempFilePath);
+          console.log(this.imageList);
+        }).catch(error => {
+          // handle error
+          console.log(error);
+        })
+      })
+    }
+    /*  */
     /* console.log(this.commentList); */
   },
   onUnload() {
     this.commentList = [];
+    this.imageList= [];
   }
 }
 </script>

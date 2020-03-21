@@ -229,10 +229,10 @@ class Mysql {
     })
   }
 
-  insertQuestion (user_id, nickName, avatarUrl, title, content, time) {
+  insertQuestion (user_id, nickName, avatarUrl, title, content, imageArray, time) {
     return new Promise((resolve, reject) => {
-      let insertSql = `INSERT INTO question ( user_id, nickName, avatarUrl, title, content, time ) VALUES(?, ?, ?, ?, ?, ?) `;
-      let insertSql_Params = [user_id, nickName, avatarUrl, title, content, time];
+      let insertSql = `INSERT INTO question ( user_id, nickName, avatarUrl, title, content, imageArray, time ) VALUES(?, ?, ?, ?, ?, ?, ?) `;
+      let insertSql_Params = [user_id, nickName, avatarUrl, title, content, imageArray, time];
       pool.query(insertSql, insertSql_Params, function (error, results, fields) {
           if (error) {
               throw error

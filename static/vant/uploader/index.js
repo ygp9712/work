@@ -83,7 +83,7 @@ VantComponent({
             if (this.data.disabled)
                 return;
             const { name = '', capture, maxCount, multiple, maxSize, accept, sizeType, lists, camera, compressed, maxDuration, useBeforeRead = false // 是否定义了 beforeRead
-             } = this.data;
+            } = this.data;
             let chooseFile = null;
             const newMaxCount = maxCount - lists.length;
             // 设置为只选择图片的时候使用 chooseImage 来实现
@@ -149,13 +149,13 @@ VantComponent({
                         callback: (result) => {
                             if (result) {
                                 // 开始上传
-                                this.$emit('after-read', { file, name });
+                                this.$emit('afterRead', { file, name });
                             }
                         }
                     });
                 }
                 else {
-                    this.$emit('after-read', { file, name });
+                    this.$emit('afterRead', { file, name });
                 }
             })
                 .catch(error => {

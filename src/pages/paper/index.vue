@@ -15,12 +15,12 @@
           :id="item.id - 1"
           @change="clickRadio">
             <radio v-for="(choose, index_) of item.selectList" 
-                 :key="index_"
-                 class="select-choose" 
-                 :name="choose.name"
-                 :value="choose.name"
-                 >
-             <span>{{arr[index_]}}、</span>{{choose.value}}
+                :key="index_"
+                class="select-choose" 
+                :name="choose.name"
+                :value="choose.name"
+                >
+            <span>{{arr[index_]}}、</span>{{choose.value}}
             </radio>
           </radio-group>
           <div class="prompt-wrapper">
@@ -59,13 +59,13 @@
                   </span>
                 </div><br>
                 <div>正确答案：
-                  <span class="multi-answer" v-for="(cAnswer, index__) of correctAnswer.multi[index]" :key="index___">
+                  <span class="multi-answer" v-for="(cAnswer, index___) of correctAnswer.multi[index]" :key="index___">
                     {{arr[cAnswer -1]}}
                   </span>
                 </div>
                 <div class="answer-btn" @click="showPic(paper.paper+'_m'+item.id)">查看答案</div>
             </div>
-           </div>
+          </div>
         </div> 
         <!-- 多选模块结束 -->
       </div>

@@ -140,8 +140,9 @@ router.get('/addQuestion', async(ctx, next) => {
   let avatarUrl = ctx.query.avatarUrl;
   let title = ctx.query.title;
   let content = ctx.query.content;
+  let imageArray = ctx.query.imageArray;
   let time = ctx.query.time;
-  let answer = await mysql.insertQuestion(user_id, nickName, avatarUrl, title, content, time);
+  let answer = await mysql.insertQuestion(user_id, nickName, avatarUrl, title, content, imageArray, time);
   ctx.body = answer;
 })
 
