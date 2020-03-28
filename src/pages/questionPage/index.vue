@@ -70,7 +70,9 @@
       </div>
     </div>
     <div class="reply-wrapper" v-if="showReply">
-      <input id="reply-input" v-model="myReply" class="reply-input" focus="auto" type="text" @blur="handleBlur()" :placeholder="inputText"/>
+      <input id="reply-input" v-model="myReply" class="reply-input"
+      focus="auto" type="text" @blur="handleBlur()" confirm-type="send" @confirm="addReply()"
+      :placeholder="inputText"/>
       <div @click="addReply()" class="reply-btn">发送</div>
     </div>
 
@@ -174,9 +176,12 @@ export default {
         nickName: this.userInfo.nickName,
         content: this.myComment,
         before: '0秒前',
-        likeNum: 0
+        likeNum: 0,
+        replyList: [],
+        time: this.nowTime
       })
       this.myComment = '';
+      console.log(this.commentList);
     },
     async addReply(){
       if(!this.myReply){
@@ -186,27 +191,29 @@ export default {
         console.log('1');
         let answer = await request('/addQReply', { question_id: this.item.id, question_title: this.item.title,comment_id: this.commentId, nickName: this.userInfo.nickName, content: this.myReply, time: this.nowTime, replyTo: this.replyTo.id, replyName: this.replyTo.nickName, isReturn: 1}) 
         this.commentList[this.nowComment].replyList.splice(this.commentList[this.nowComment].replyList.length,0,{
-        id: answer.insertId,
-        question_id: this.item.id, 
-        comment_id: this.commentId, 
-        title: `${this.userInfo.nickName} 回复 ${this.replyTo.nickName}`,
-        nickName: this.userInfo.nickName, 
-        content: this.myReply, 
-        time: this.nowTime
-      })
+          id: answer.insertId,
+          question_id: this.item.id, 
+          comment_id: this.commentId, 
+          title: `${this.userInfo.nickName} 回复 ${this.replyTo.nickName}`,
+          nickName: this.userInfo.nickName, 
+          content: this.myReply, 
+          time: this.nowTime
+        })
+        console.log(this.commentList[this.nowComment].replyList);
       } else {
         console.log('2');
         let answer = await request('/addQReply', { question_id: this.item.id, question_title: this.item.title,comment_id: this.commentId, nickName: this.userInfo.nickName, content: this.myReply, time: this.nowTime, replyTo: 'null', replyName: this.commentName, isReturn: 0 })
         this.commentList[this.nowComment].replyList.splice(this.commentList[this.nowComment].replyList.length,0,{
-        id: answer.insertId,
-        question_id: this.item.id, 
-        question_title: this.item.title,
-        comment_id: this.commentId,
-        title:  this.userInfo.nickName,
-        nickName: this.userInfo.nickName, 
-        content: this.myReply, 
-        time: this.nowTime
-      })
+          id: answer.insertId,
+          question_id: this.item.id, 
+          question_title: this.item.title,
+          comment_id: this.commentId,
+          title:  this.userInfo.nickName,
+          nickName: this.userInfo.nickName, 
+          content: this.myReply, 
+          time: this.nowTime
+        })
+        console.log(this.commentList[this.nowComment].replyList);
       } 
       this.myReply = '';
     }
@@ -224,7 +231,6 @@ export default {
       element.before = handleTime.formatBefore(this.nowTime - element.time);
       element.replyList = await request('/getQReplyList', { id: element.id });
       element.replyList.forEach((element_) => {
-        console.log(element_.isReturn);
         if (element_.isReturn) {
           element_.title = `${element_.nickName} 回复 ${element_.toName}`;
         } else {
@@ -238,6 +244,7 @@ export default {
     let timer = setInterval(() => {
       if (queryCommentList.length) {
         this.commentList = queryCommentList;
+        console.log('评论list',this.commentList); 
         clearInterval(timer);
       }
     }, 100);
@@ -252,13 +259,11 @@ export default {
     if(this.item.imageArray != "") {
       wx.cloud.init();
       this.item.imageArray.forEach((element) => {
-        console.log(element);
         wx.cloud.downloadFile({
         fileID: `${element}`
         }).then(res => {
           // get temp file path
           this.imageList.push(res.tempFilePath);
-          console.log(this.imageList);
         }).catch(error => {
           // handle error
           console.log(error);

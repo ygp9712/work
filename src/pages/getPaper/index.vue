@@ -21,28 +21,22 @@ export default {
         port: 'zhengzhi'
       },
       {
-        title: '数学一',
-        port: 'shuxueyi'
-      },
-      {
-        title: '数学二',
-        port: 'shuxueer',
-      },
-      {
         title: '英语一',
         port: 'yingyuyi'
-      },
+      }/* ,
       {
         title: '英语二',
         port: 'yingyuer'
-      }]
+      } */]
     }
   },
   methods: {
     async toPaperList (item) {
+      wx.showLoading();
       if (this.isLogin) {
         await request('/addHistory', {item_id : 'null', item_name : item.title,item_type: 'paper', item_class : item.port})
       }
+      wx.hideLoading();
       wx.navigateTo({
         url: `/pages/paperList/main?port=${item.port}`
       })

@@ -17,10 +17,17 @@ export default {
     }
   },
   methods:{
-    goPaper (paper, index) {
-      wx.navigateTo({
-        url:'/pages/paper/main?paper=' + JSON.stringify(paper)
+    goPaper (paper) {
+      wx.showLoading();
+      wx.setStorage({
+        key: "paper",
+        data: paper
       })
+      wx.hideLoading();
+      wx.navigateTo({
+        url:`/pages/paper/main?port=${this.$mp.query.port}`
+      })
+      
     }
   },
   async onShow () {
@@ -30,7 +37,6 @@ export default {
       title: result.title
     })
     this.paperList = result.paperList;
-    console.log(result);
   }
 }
 </script>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/getPaper/main",
     "pages/question/main",
     "pages/index/main",
     "pages/personal/main",
@@ -7,7 +8,6 @@
     "pages/questionPage/main",
     "pages/personalPage/main",
     "pages/todoList/main",
-    "pages/getPaper/main",
     "pages/bookList/main",
     "pages/articleList/main",
     "pages/paper/main",

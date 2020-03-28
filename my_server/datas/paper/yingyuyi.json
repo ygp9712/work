@@ -1,4 +1,450 @@
 {
   "title": "英语一",
-  "paperList": [{"paper": "2019考研英语一试题", "nickname": "2019yingyuyi"}]
+  "paperList": [
+    { "paper": "2020考研英语一试题", 
+      "nickname": "2020yingyuyi",
+      "result": {"single": [], "multi": []},
+      "sectionI": [
+        {
+          "id": 1,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]In"},
+                          {"name": 2, "value":"[B]Towards"},
+                          {"name": 3, "value":"[C]On"},
+                          {"name": 4, "value":"[D]Till"}],
+          "right": 0
+        },
+        {
+          "id": 2,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]match"},
+                          {"name": 2, "value":"[B]express"},
+                          {"name": 3, "value":"[C]satisfy ."},
+                          {"name": 4, "value":"[D]influence"}],
+          "right": 0
+        },
+        {
+          "id": 3,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]patience"},
+                          {"name": 2, "value":"[B]enjoyment"},
+                          {"name": 3, "value":"[C]surprise"},
+                          {"name": 4, "value":"[D]concern"}],
+          "right": 0
+        },
+        {
+          "id": 4,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]intensified"},
+                          {"name": 2, "value":"[B]privileged"},
+                          {"name": 3, "value":"[C]compelled"},
+                          {"name": 4, "value":"[D]guaranteed"}],
+          "right": 0
+        },
+        {
+          "id": 5,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]issued"},
+                          {"name": 2, "value":"[B]received"},
+                          {"name": 3, "value":"[C]ignored "},
+                          {"name": 4, "value":"[D]cancelled"}],
+          "right": 0
+        },
+        {
+          "id": 6,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]under"},
+                          {"name": 2, "value":"[B]at"},
+                          {"name": 3, "value":"[C]for"},
+                          {"name": 4, "value":"[D]by"}],
+          "right": 0
+        },
+        {
+          "id": 7,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]forget"},
+                          {"name": 2, "value":"[B]regret"},
+                          {"name": 3, "value":"[C]finish"},
+                          {"name": 4, "value":"[D]avoid"}],
+          "right": 0
+        },
+        {
+          "id": 8,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]partially"},
+                          {"name": 2, "value":"[B]regularly"},
+                          {"name": 3, "value":"[C]easily"},
+                          {"name": 4, "value":"[D]initially"}],
+          "right": 0
+        },
+        {
+          "id": 9,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]Unless"},
+                          {"name": 2, "value":"[B]Since"},
+                          {"name": 3, "value":"[C]lf"},
+                          {"name": 4, "value":"[D]While"}],
+          "right": 0
+        },
+        {
+          "id": 10,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]secondary"},
+                          {"name": 2, "value":"[B]external"},
+                          {"name": 3, "value":"[C]conclusive "},
+                          {"name": 4, "value":"[D]negative"}],
+          "right": 0
+        },
+        {
+          "id": 11,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]insufficient"},
+                          {"name": 2, "value":"[B]bound"},
+                          {"name": 3, "value":"[C]likely"},
+                          {"name": 4, "value":"[D]slow"}],
+          "right": 0
+        },
+        {
+          "id": 12,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]On the basis of "},
+                          {"name": 2, "value":"[B]At the cost of "},
+                          {"name": 3, "value":"[C]In addition to"},
+                          {"name": 4, "value":"[D]In contrast to"}],
+          "right": 0
+        },
+        {
+          "id": 13,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]interesting"},
+                          {"name": 2, "value":"[B]advisable"},
+                          {"name": 3, "value":"[C]urgent"},
+                          {"name": 4, "value":"[D]fortunate"}],
+          "right": 0
+        },
+        {
+          "id": 14,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]As usual ."},
+                          {"name": 2, "value":"[B]In particular"},
+                          {"name": 3, "value":"[C]By definition "},
+                          {"name": 4, "value":"[D]After all"}],
+          "right": 0
+        },
+        {
+          "id": 15,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]resemblance "},
+                          {"name": 2, "value":"[B]combination"},
+                          {"name": 3, "value":"[C]connection"},
+                          {"name": 4, "value":"[D]pattern"}],
+          "right": 0
+        },
+        {
+          "id": 16,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]made"},
+                          {"name": 2, "value":"[B]served"},
+                          {"name": 3, "value":"[C]saved"},
+                          {"name": 4, "value":"[D]used"}],
+          "right": 0
+        },
+        {
+          "id": 17,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]To be fair"},
+                          {"name": 2, "value":"[B]For instance "},
+                          {"name": 3, "value":"[C]To be brief"},
+                          {"name": 4, "value":"[D]In general"}],
+          "right": 0
+        },
+        {
+          "id": 18,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]reluctantly "},
+                          {"name": 2, "value":"[B]entirely"},
+                          {"name": 3, "value":"[C]gradually"},
+                          {"name": 4, "value":"[D]carefully"}],
+          "right": 0
+        },
+        {
+          "id": 19,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]promise"},
+                          {"name": 2, "value":"[B]experience"},
+                          {"name": 3, "value":"[C]campaign"},
+                          {"name": 4, "value":"[D]competition"}],
+          "right": 0
+        },
+        {
+          "id": 20,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]follow up"},
+                          {"name": 2, "value":"[B]pick up"},
+                          {"name": 3, "value":"[C]open up"},
+                          {"name": 4, "value":"[D]end up"}],
+          "right": 0
+        }
+      ],
+      "sectionIIText1": [
+        {
+          "id": 21,
+          "problem": "Cooper and her colleagues argue that a “town of culture” award could ________",
+          "selectList":  [{"name": 1, "value":"[A] consolidate the town city ties in Britain"},
+                          {"name": 2, "value":"[B] promote cooperation among Britain' s towns"},
+                          {"name": 3, "value":"[C] increase the economic strength of Britain' s towns"},
+                          {"name": 4, "value":"[D] focus Britain' s limited resources on cultural events"}],
+          "right": 0
+        },
+        {
+          "id": 22,
+          "problem": "According to Paragraph 2, the proposal might be regarded by some as ______",
+          "selectList":  [{"name": 1, "value":"[A] a sensible compromise"},
+                          {"name": 2, "value":"[B] a self-deceiving attempt"},
+                          {"name": 3, "value":"[C] an eye-catching bonus"},
+                          {"name": 4, "value":"[D] an inaccessible target"}],
+          "right": 0
+        },
+        {
+          "id": 23,
+          "problem": "The author suggests that a title holder is successful only if it __________",
+          "selectList":  [{"name": 1, "value":"[A] endeavours to maintain its image"},
+                          {"name": 2, "value":"[B] meets the aspirations of its people"},
+                          {"name": 3, "value":"[C] brings its local arts to prominence"},
+                          {"name": 4, "value":"[D] commits to its long-term growth"}],
+          "right": 0
+        },
+        {
+          "id": 24,
+          "problem": "Glasgow is mentioned in Paragraph 3 to present ________",
+          "selectList":  [{"name": 1, "value":"[A] a contrasting case"},
+                          {"name": 2, "value":"[B] a supporting example"},
+                          {"name": 3, "value":"[C] a background story"},
+                          {"name": 4, "value":"[D] a related topic"}],
+          "right": 0
+        },
+        {
+          "id": 25,
+          "problem": "What is the author' s attitude towards the proposal?",
+          "selectList":  [{"name": 1, "value":"[A] Skeptical"},
+                          {"name": 2, "value":"[B] Objective"},
+                          {"name": 3, "value":"[C] Favorable"},
+                          {"name": 4, "value":"[D] Critical"}],
+          "right": 0
+        }
+      ],
+      "sectionIIText2": [
+        {
+          "id": 26,
+          "problem": "Scientific publishing is seen as“ a licence to print money partly because _______",
+          "selectList":  [{"name": 1, "value":"[A] its funding has enjoyed a steady increase"},
+                          {"name": 2, "value":"[B] its marketing strategy has been successful"},
+                          {"name": 3, "value":"[C] its payment for peer review is reduced"},
+                          {"name": 4, "value":"[D] its content acquisition costs nothing"}],
+          "right": 0
+        },
+        {
+          "id": 27,
+          "problem": "According to Paragraphs 2 and 3, scientific publishers Elsevier have ______",
+          "selectList":  [{"name": 1, "value":"[A] thrived mainly on university libraries"},
+                          {"name": 2, "value":"[B] gone through an existential crisis"},
+                          {"name": 3, "value":"[C] revived the publishing industry"},
+                          {"name": 4, "value":"[D] financed researchers generously"}],
+          "right": 0
+        },
+        {
+          "id": 28,
+          "problem": "How does the author feel about the success of Sci-Hub?",
+          "selectList":  [{"name": 1, "value":"[A] Relieved."},
+                          {"name": 2, "value":"[B] Puzzled."},
+                          {"name": 3, "value":"[C] Concerned."},
+                          {"name": 4, "value":"[D] Encouraged."}],
+          "right": 0
+        },
+        {
+          "id": 29,
+          "problem": "It can be learned from Paragraphs 5 and 6 that open access terms",
+          "selectList":  [{"name": 1, "value":"[A] allow publishers some room to make money"},
+                          {"name": 2, "value":"[B] render publishing much easier for scientists"},
+                          {"name": 3, "value":"[C] reduce the cost of publication substantially"},
+                          {"name": 4, "value":"[D] free universities from financial burdens"}],
+          "right": 0
+        },
+        {
+          "id": 30,
+          "problem": "Which of the following characterizes the scientific publishing model?",
+          "selectList":  [{"name": 1, "value":"[A] Trial subscription is offered."},
+                          {"name": 2, "value":"[B] Labour triumphs over status."},
+                          {"name": 3, "value":"[C] Costs are well controlled."},
+                          {"name": 4, "value":"[D] The few feed on the many."}],
+          "right": 0
+        }
+      ],
+      "sectionIIText3": [
+        {
+          "id": 31,
+          "problem": "The author believes that the bills sponsored by Lewis and Haddad will _____",
+          "selectList":  [{"name": 1, "value":"[A] help litte to reduce gender bias"},
+                          {"name": 2, "value":"[B] pose a threat to the state government"},
+                          {"name": 3, "value":"[C] raise women’s position in politics"},
+                          {"name": 4, "value":"[D] greatly broaden career options"}],
+          "right": 0
+        },
+        {
+          "id": 32,
+          "problem": "Which of the following is true of the Califormia measure?",
+          "selectList":  [{"name": 1, "value":"[A] It has rritated private business owners."},
+                          {"name": 2, "value":"[B] It is welcomed by the Supreme Court."},
+                          {"name": 3, "value":"[C] It may go against the Constitution."},
+                          {"name": 4, "value":"[D] It will settle the prior controversies."}],
+          "right": 0
+        },
+        {
+          "id": 33,
+          "problem": "The author mentions the study by Catalyst to ilustrate ______",
+          "selectList":  [{"name": 1, "value":"[A] the harm from arbitrary board decision"},
+                          {"name": 2, "value":"[B] the importance of constitutional guarantees"},
+                          {"name": 3, "value":"[C] the pressure on women in global corporations"},
+                          {"name": 4, "value":"[D] the needlessness of government interventions"}],
+          "right": 0
+        },
+        {
+          "id": 34,
+          "problem": "Norway' s adoption of a nationwide corporate gender quota has led to ______",
+          "selectList":  [{"name": 1, "value":"[A] the underestimation of elite women' s role"},
+                          {"name": 2, "value":"[B] the objection to female participation on boards"},
+                          {"name": 3, "value":"[C] the entry of unqualified candidates into the board"},
+                          {"name": 4, "value":"[D] the growing tension between labor and management"}],
+          "right": 0
+        },
+        {
+          "id": 35,
+          "problem": " Which of the following can be inferred from the text?",
+          "selectList":  [{"name": 1, "value":"[A] Women' s need in employment should be considered."},
+                          {"name": 2, "value":"[B] Feasibility should be a prime concern in policymaking."},
+                          {"name": 3, "value":"[C] Everyone should try hard to promote social justice."},
+                          {"name": 4, "value":"[D] Major social issues should be the focus of legislation."}],
+          "right": 0
+        }
+      ],
+      "sectionIIText4": [
+        {
+          "id": 36,
+          "problem": "The French Senate has passed a bill to ______",
+          "selectList":  [{"name": 1, "value":"[A] regulate digital services platforms"},
+                          {"name": 2, "value":"[B] protect French companies’interests"},
+                          {"name": 3, "value":"[C] impose a levy on tech multinationals"},
+                          {"name": 4, "value":"[D] curb the influence of advertising"}],
+          "right": 0
+        },
+        {
+          "id": 37,
+          "problem": "It can be learned from Paragraph 2 that the digital services tax _______",
+          "selectList":  [{"name": 1, "value":"[A] may trigger countermeasures against France"},
+                          {"name": 2, "value":"[B] is apt to arouse criticism at home and abroad"},
+                          {"name": 3, "value":"[C] aims to ease international trade tensions"},
+                          {"name": 4, "value":"[D] will prompt the tech giants to quit France"}],
+          "right": 0
+        },
+        {
+          "id": 38,
+          "problem": "The countries adopting the unilateral measures share the opinion that ______",
+          "selectList":  [{"name": 1, "value":"[A] redistribution of tech giants' revenue must be ensured"},
+                          {"name": 2, "value":"[B] the current international tax system needs upgrading"},
+                          {"name": 3, "value":"[C] tech multinationals' monopoly should be prevented"},
+                          {"name": 4, "value":"[D] all countries ought to enjoy equal taxing rights"}],
+          "right": 0
+        },
+        {
+          "id": 39,
+          "problem": "It can be learned from Paragraph 5 that the OECD' s current work ______",
+          "selectList":  [{"name": 1, "value":"[A] is being resisted by US companies"},
+                          {"name": 2, "value":"[B] needs to be readjusted immediately"},
+                          {"name": 3, "value":"[C] is faced with uncertain prospects"},
+                          {"name": 4, "value":"[D] needs to involve more countries"}],
+          "right": 0
+        },
+        {
+          "id": 40,
+          "problem": "Which of the following might be the best title for this text?",
+          "selectList":  [{"name": 1, "value":"[A] France Is Confronted with Trade Sanctions."},
+                          {"name": 2, "value":"[B] France Leads the Charge on Digital Tax."},
+                          {"name": 3, "value":"[C] France Says“ NO”to Tech Multinationals."},
+                          {"name": 4, "value":"[D] France Demands a Role in the Digital Economy."}],
+          "right": 0
+        }
+      ],
+      "sectionIIB": [
+        {
+          "id": 41,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]"},
+                          {"name": 2, "value":"[B]"},
+                          {"name": 3, "value":"[C]"},
+                          {"name": 4, "value":"[D]"},
+                          {"name": 5, "value":"[E]"},
+                          {"name": 6, "value":"[F]"},
+                          {"name": 7, "value":"[G]"}],
+          "right": 0
+        },
+        {
+          "id": 42,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]"},
+                          {"name": 2, "value":"[B]"},
+                          {"name": 3, "value":"[C]"},
+                          {"name": 4, "value":"[D]"},
+                          {"name": 5, "value":"[E]"},
+                          {"name": 6, "value":"[F]"},
+                          {"name": 7, "value":"[G]"}],
+          "right": 0
+        },
+        {
+          "id": 43,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]"},
+                          {"name": 2, "value":"[B]"},
+                          {"name": 3, "value":"[C]"},
+                          {"name": 4, "value":"[D]"},
+                          {"name": 5, "value":"[E]"},
+                          {"name": 6, "value":"[F]"},
+                          {"name": 7, "value":"[G]"}],
+          "right": 0
+        },
+        {
+          "id": 44,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]"},
+                          {"name": 2, "value":"[B]"},
+                          {"name": 3, "value":"[C]"},
+                          {"name": 4, "value":"[D]"},
+                          {"name": 5, "value":"[E]"},
+                          {"name": 6, "value":"[F]"},
+                          {"name": 7, "value":"[G]"}],
+          "right": 0
+        },
+        {
+          "id": 45,
+          "problem": "",
+          "selectList":  [{"name": 1, "value":"[A]"},
+                          {"name": 2, "value":"[B]"},
+                          {"name": 3, "value":"[C]"},
+                          {"name": 4, "value":"[D]"},
+                          {"name": 5, "value":"[E]"},
+                          {"name": 6, "value":"[F]"},
+                          {"name": 7, "value":"[G]"}],
+          "right": 0
+        }
+      ],
+      "sectionIIBList": [
+        "[A] Eye fixations are brief.",
+        "[B] Too much eye contact is instinctively felt to be rude.",
+        "[C] Eye contact can be a friendly social signal.",
+        "[D] Personality can affect how a person reacts to eye contact.",
+        "[E] Biological factors behind eye contact are being investigated.",
+        "[F] Most people are not comfortable holding eye contact with strangers.",
+        "[G] Eye contact can also be aggressive."
+      ]
+    }
+  ]
 }

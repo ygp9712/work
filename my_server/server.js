@@ -5,8 +5,6 @@ const router = require('./routes')
 // 一. 生成应用以及路由实例
 const app = new Koa()
 
-
-
 // 二. 使用路由
 app
   .use(router.routes()) // 声明使用路由
