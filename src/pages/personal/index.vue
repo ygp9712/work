@@ -4,7 +4,7 @@
       <div class="header">
         <img :src="userInfo.avatarUrl ? userInfo.avatarUrl : '/static/imgs/personal.png'" alt="">
         <div class="user-name">{{userInfo.nickName ? userInfo.nickName : '用户名字'}}</div>
-        <div style="width: 100%; text-align: center;color: yellow;">距离2020考研还有</div>
+        <div style="width: 100%; text-align: center;color: yellow;">距离2021考研还有</div>
         <div style="width: 100%; text-align: center;color: #ffffff;">{{countdown}}</div>
       </div>
       <div class="QR-area">

@@ -6,7 +6,8 @@ const handleList = require('./helper/handleList');
  
 (async () => {
  
-  const browser = await puppeteer.launch({headless: true, slowMo: 250, defaultViewport: {width: 1280, height: 800}})
+  
+  const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], slowMo: 250})
  
   const page = await browser.newPage()
  

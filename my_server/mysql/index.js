@@ -22,9 +22,9 @@ class Mysql {
       });
     })
   }
-  deleteQReply(id) {
+  deleteQReply(id, user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM question_reply WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`DELETE FROM question_reply WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -58,9 +58,9 @@ class Mysql {
     })
   }
   
-  deleteQComment(id) {
+  deleteQComment(id, user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM question_comment WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`DELETE FROM question_comment WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -69,6 +69,7 @@ class Mysql {
     })
   }
   
+
   queryQCommentMax (user_id) {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT  count(*) FROM question_comment WHERE user_id='${user_id}'`, function (error, results, fields) {
@@ -94,9 +95,9 @@ class Mysql {
     })
   }
 
-  deleteQuestion(id) {
+  deleteQuestion(id, user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM question WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`DELETE FROM question WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -253,6 +254,17 @@ class Mysql {
       });
     })
   }
+  
+  deleteComment(id, user_id) {
+    return new Promise((resolve, reject) => {
+      pool.query(`DELETE FROM comment WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
+          if (error) {
+              throw error
+          };
+          resolve(results)
+      });
+    })
+  }
 
   queryQuestion (id) {
     return new Promise((resolve, reject) => {
@@ -305,7 +317,7 @@ class Mysql {
   personalComment (user_id, page) {
     let num = 8;
     return new Promise((resolve, reject) => {
-      pool.query(`SELECT book_id,book_title,content,time FROM comment WHERE user_id='${user_id}' ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
+      pool.query(`SELECT id,book_id,book_title,content,time FROM comment WHERE user_id='${user_id}' ORDER BY id DESC LIMIT ${(page-1)*num},${num}`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -349,9 +361,9 @@ class Mysql {
     })
   }
 
-  deleteTodo(id) {
+  deleteTodo(id, user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM todolist WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`DELETE FROM todolist WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -443,9 +455,9 @@ class Mysql {
     })
   }
 
-  deleteLike (id) {
+  deleteLike (id, user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM collection WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`DELETE FROM collection WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
           if (error) {
               throw error
           };
@@ -478,9 +490,9 @@ class Mysql {
     })
   }
 
-  deleteHistory (id) {
+  deleteHistory (id, user_id) {
     return new Promise((resolve, reject) => {
-      pool.query(`DELETE FROM history WHERE id=${id}`, function (error, results, fields) {
+      pool.query(`DELETE FROM history WHERE id=${id} AND user_id='${user_id}'`, function (error, results, fields) {
           if (error) {
               throw error
           };

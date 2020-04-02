@@ -3,7 +3,7 @@ const mysql = require('../../mysql');
 module.exports = async (href, table) => {
   const myRegExp = /(\w+)/g;
   const id = href.match(myRegExp)[9];
-  const browser = await puppeteer.launch({headless: true});
+  const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], slowMo: 250})
   const page = await browser.newPage();
   await page.goto(href, {waitUntil: 'networkidle2'})
   await page.waitFor(2000)

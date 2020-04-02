@@ -1,9 +1,11 @@
 //  搭建服务器的核心文件
 const Koa = require('koa')
 const router = require('./routes')
-
+const bodyParser = require('koa-bodyparser');
 // 一. 生成应用以及路由实例
 const app = new Koa()
+app.use(bodyParser());
+//bodyParser用来解析POST数据传参
 
 // 二. 使用路由
 app

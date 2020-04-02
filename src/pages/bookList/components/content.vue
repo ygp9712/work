@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @touchmove="touchmoveCallback" @touchstart="touchstartCallback">
     <div class="book-items">
       <div class="book" v-for="(item, index) of bookList" :key="index" @click="toDetail(item.id, item.title)">
         <div class="img">
@@ -26,10 +26,31 @@ export default {
     return {
       isLogin: '',
       bookList: [],
-      subject: 'english'
+      subject: 'english',
+      startX: '',
+      timer: ''
     }
   },
   methods: {
+    touchstartCallback(e) {
+      this.startX = e.clientX;
+      // 当两根手指放上去的时候，将距离(distance)初始化。
+    },
+    touchmoveCallback(e) {
+      //函数防抖
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(() => {
+        if (this.startX - e.clientX > 100) {
+          /* console.log('向左滑动了') */
+          Bus.$emit('toRight', this.subject)
+        } else if (this.startX - e.clientX < -100) {
+          /* console.log('向右滑动了'); */
+          Bus.$emit('toLeft', this.subject)
+        }
+      }, 300)  
+    },
     async toDetail (id, title) {
       let mark, isLike;
       if (this.isLogin) {
@@ -71,6 +92,7 @@ export default {
 
 <style lang="stylus" scoped>
   .container
+    height: 100%;
     margin-top: 30rpx;
     .book-items
       display: flex;

@@ -2,9 +2,9 @@
   <div class="container">
     <div class="search">
       <input class="search-input" v-model="searchText" type="text" placeholder="请输入文章的关键字"
-              placeholder-class="iconfont iconsousuo" confirm-type="search" @confirm="handleSearch()">
+              confirm-type="search" @confirm="handleSearch()">
       <span class="iconfont iconchahao" @click="clearText()" v-show="searchText!= ''"></span>
-      <div class="search-confirm" @click="handleSearch()">搜索</div>
+      <div class="search-confirm" @click="handleSearch()"><span class="iconfont iconsousuo">搜索</span></div>
     </div>
     <div class="list" v-if="showSearch === false">
       <div class="list-item" v-for="(item, index) of articleList" :key="index" @click="toArticle(item)">
@@ -156,16 +156,16 @@ export default {
         border-radius: 5px;
         background: #ffffff;
         width: 65%;
-      .iconfont
+      .iconchahao
         position: absolute;
-        right: 160rpx;
+        right: 180rpx;
         color: #8B7E66;
         font-size: 55rpx;
       .search-confirm
         margin-left: 10px;
         text-align: center;
         line-height: 30px;
-        width: 50px;
+        width: 70px;
         height: 30px;
         background: green;
         color: #ffffff;

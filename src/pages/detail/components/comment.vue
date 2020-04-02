@@ -40,7 +40,7 @@ export default {
       bookComment: [],
       comment: '',
       genderClass: ['iconfont iconnvxing', 'iconfont iconnanxing'],
-      currentDate: new Date().getTime()
+      currentDate: ''
     }
   },
   methods: {
@@ -70,6 +70,7 @@ export default {
     bookId (newValue,oldValue) {
       /* console.log(newValue) */
       this.getComment();
+      this.currentDate = new Date().getTime()
     }
   }
 }

@@ -40,7 +40,7 @@
           <span class="before">
             {{item.before}}前
           </span>
-          <div class="reply" @click="handleReply(item, index)">
+          <div class="reply" @click="handleReply(item, index)" v-if="item.temp!=true">
             回复
           </div>
         </div>
@@ -175,11 +175,13 @@ export default {
         avatarUrl: this.userInfo.avatarUrl,
         nickName: this.userInfo.nickName,
         content: this.myComment,
+        replyList: [],
         before: '0秒前',
         likeNum: 0,
-        replyList: [],
-        time: this.nowTime
+        time: this.nowTime,
+        temp: true
       })
+      this.$forceUpdate()
       this.myComment = '';
       console.log(this.commentList);
     },
@@ -199,6 +201,7 @@ export default {
           content: this.myReply, 
           time: this.nowTime
         })
+        this.$forceUpdate()
         console.log(this.commentList[this.nowComment].replyList);
       } else {
         console.log('2');
@@ -214,6 +217,7 @@ export default {
           time: this.nowTime
         })
         console.log(this.commentList[this.nowComment].replyList);
+        this.$forceUpdate()
       } 
       this.myReply = '';
     }
@@ -247,7 +251,7 @@ export default {
         console.log('评论list',this.commentList); 
         clearInterval(timer);
       }
-    }, 100);
+    }, 300);
     /* setTimeout(() => {
       this.commentList = queryCommentList;
     }, 300) */

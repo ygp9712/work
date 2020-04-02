@@ -147,20 +147,29 @@ router.get('/addQuestion', async(ctx, next) => {
 })
 
 router.get('/deleteQReply', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let id = ctx.query.id;
-  await mysql.deleteQReply(id);
+  await mysql.deleteQReply(id, user_id);
   ctx.body = 'done';
 })
 
 router.get('/deleteQComment', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let id = ctx.query.id;
-  await mysql.deleteQComment(id);
+  await mysql.deleteQComment(id, user_id);
   ctx.body = 'done';
 })
 
 router.get('/deleteQuestion', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let id = ctx.query.id;
-  await mysql.deleteQuestion(id);
+  await mysql.deleteQuestion(id, user_id); 
   ctx.body = 'done';
 })
 
@@ -188,6 +197,16 @@ router.get('/getQuestionList', async(ctx, next) => {
 /*=============================      问答接口      ==============================*/
 
 /*--------------------------        评论接口       -----------------------------*/
+router.post('/deleteComment', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
+  let id = ctx.request.body.id;
+  console.log(`id是${id}, user_id是${user_id}`);
+  await mysql.deleteComment(id, user_id);
+  ctx.body = 'done';
+})
+
 router.get('/getCommentMax', async(ctx, next) => {
   let token = ctx.request.header.authorization;
   let decoded = jwt.verify(token, 'yangguo');
@@ -232,8 +251,11 @@ router.get('/queryTodo', async(ctx, next) => {
 })
 
 router.get('/deleteTodo', async(ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let id = ctx.query.id;
-  let answer = await mysql.deleteTodo(id);
+  let answer = await mysql.deleteTodo(id, user_id);
   ctx.body = answer;
 })
 
@@ -309,19 +331,25 @@ router.get('/addLike', async (ctx, next) => {
 })
 
 router.get('/deleteLike', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let id = ctx.query.id;
-  let result = await mysql.deleteLike(id);
+  let result = await mysql.deleteLike(id, user_id);
   ctx.body = result;
 })
 /*--------------------------        收藏接口       -----------------------------*/
 
 router.get('/deletePersonal', async (ctx, next) => {
+  let token = ctx.request.header.authorization;
+  let decoded = jwt.verify(token, 'yangguo');
+  let user_id = decoded.openid;
   let type = ctx.query.type;
   let id = ctx.query.id;
   if(type === 'Collection') {
-    await mysql.deleteLike(id);
+    await mysql.deleteLike(id, user_id);
   } else {
-    await mysql.deleteHistory(id);
+    await mysql.deleteHistory(id, user_id);
   }
   ctx.body = 'over';
 } )
@@ -367,7 +395,7 @@ router.get('/addHistory', async (ctx, next) => {
   let query = await mysql.queryHistory(user_id, item_id, item_type, item_class);
   if(query[0])
   {
-    await mysql.deleteHistory(query[0].id)
+    await mysql.deleteHistory(query[0].id, user_id)
   }
   let answer = await mysql.insertHistory(user_id, item_id, item_name, item_type, item_class, time);
   console.log(answer.insertId);

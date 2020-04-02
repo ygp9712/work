@@ -46,12 +46,33 @@ export default {
   methods: {
     scrollClick(port, index) {
       if(index === this.nowActive) return
-      this.nowSubject = port;
-      Bus.$emit('scrollClick', this.nowSubject)
-      this.subjectList[this.nowActive].btnClass = 'subject-item';
-      this.subjectList[index].btnClass = 'subject-item active';
-      this.nowActive = index;
+        this.nowSubject = port;
+        Bus.$emit('scrollClick', this.nowSubject)
+        this.subjectList[this.nowActive].btnClass = 'subject-item';
+        this.subjectList[index].btnClass = 'subject-item active';
+        this.nowActive = index;
     }
+  },
+  mounted() {
+    Bus.$on('toRight', (port) => {
+      console.log('右',port);
+      this.subjectList.forEach((element, index) => {
+        if (element.subjectPort === port) {
+          if (index != this.subjectList.length-1) {
+            this.scrollClick(this.subjectList[index+1].subjectPort, index+1)
+          }
+        }
+      })
+    });
+    Bus.$on('toLeft', (port) => {
+      this.subjectList.forEach((element, index) => {
+        if (element.subjectPort === port) {
+          if (index != 0) {
+            this.scrollClick(this.subjectList[index-1].subjectPort, index-1)
+          }
+        }
+      })
+    })
   },
 }
 </script>

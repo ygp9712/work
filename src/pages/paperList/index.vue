@@ -31,6 +31,7 @@ export default {
     }
   },
   async onShow () {
+    wx.hideLoading();
     let port = this.$mp.query.port;
     let result = await request('/getPaperList', {port: port});
     wx.setNavigationBarTitle({

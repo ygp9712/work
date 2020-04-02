@@ -1,19 +1,22 @@
 <template>
   <div class="container">
     <div class="comment-list">
-      <div class="comment-item" @longpress="longPress" v-for="(item, index) of commentList" :key="index">
-        <p class="comment-content">
-          {{item.content}}
-        </p>
-        <span class="comment-book">
-          {{item.book_title}}
-        </span>
-        <span class="comment-before">
-          {{item.before}}前
-        </span>
-      </div>
+      <van-swipe-cell :right-width="150" v-for="(item, index) of commentList" :key="index">
+        <div class="comment-item">
+          <p class="comment-content">
+            {{item.content}}
+          </p>
+          <span class="comment-book">
+            {{item.book_title}}
+          </span>
+          <span class="comment-before">
+            {{item.before}}前
+          </span>
+        </div>
+        <div class="swipe-right" slot="right" @click="deleteItem(item.id, index)">删除</div>
+      </van-swipe-cell>
     </div>
-    <div class="pagination" v-if="maxPage != 1">
+    <div class="pagination" v-if="maxPage>0">
       <div :class="leftClass" @click="toBackPage()">上一页</div>
       <span class="page">{{page}} / {{maxPage}}</span>
       <div :class="rightClass" @click="toNextPage()">下一页</div>
@@ -37,8 +40,11 @@ export default {
     }
   },
   methods: {
-    longPress(e) {
-      console.log(e);
+    async deleteItem(id, index) {
+      console.log(id);
+      await request('/deleteComment', {id: id}, 'POST')
+      this.commentList.splice(index,1);
+      this.maxPage = await request('/getCommentMax');
     },
     async toBackPage() {
       if (this.page === 1) return
@@ -98,8 +104,18 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .container
+    .van-swipe-cell__right {
+      display: inline-block;
+      width: 150rpx;
+      height: 180rpx;
+      font-size: 15px;
+      line-height: 180rpx;
+      background: red;
+      color: #fff;
+      text-align: center;
+    }
     .comment-list
       .comment-item
         box-sizing: border-box;
@@ -108,7 +124,6 @@ export default {
         height: 150rpx;
         padding: 20rpx;
         /* padding-right: 60rpx;  */
-        margin-bottom: 20rpx;
         background: #f2f2f2;
         .comment-content
           font-size: 44rpx;

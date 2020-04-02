@@ -45,12 +45,18 @@ export default {
     collection,
     bookComment
   },
-  onShow() {
+  async onShow() {
+    let result = await request('/getBook', {id : this.$mp.query.id, subject : this.$mp.query.subject});
+    this.bookItem = result[0];
+    console.log(this.bookItem);
+    wx.setNavigationBarTitle({
+      title: this.bookItem.title
+    })
   },
   async mounted () {
     let result = await request('/getBook', {id : this.$mp.query.id, subject : this.$mp.query.subject});
     this.bookItem = result[0];
-    /* console.log(this.bookItem); */
+    console.log(this.bookItem);
     wx.setNavigationBarTitle({
       title: this.bookItem.title
     })
@@ -59,9 +65,9 @@ export default {
     /* console.log(event); */
     //若要自定义转发内容，需要return对象
     return {
-      title: '你的书店',
-      path: '/pages/detail/main',
-      imageUrl: '/static/imgs/test1.png'
+      title: this.bookItem.title,
+      path: `/pages/detail/main?id=${this.$mp.query.id}&subject=${this.$mp.query.subject}`,
+      imageUrl: this.bookItem.src
     }
   }
 }

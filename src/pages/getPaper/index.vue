@@ -36,7 +36,6 @@ export default {
       if (this.isLogin) {
         await request('/addHistory', {item_id : 'null', item_name : item.title,item_type: 'paper', item_class : item.port})
       }
-      wx.hideLoading();
       wx.navigateTo({
         url: `/pages/paperList/main?port=${item.port}`
       })

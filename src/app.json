@@ -1,14 +1,14 @@
 {
   "pages": [
-    "pages/getPaper/main",
-    "pages/question/main",
     "pages/index/main",
+    "pages/question/main",
     "pages/personal/main",
+    "pages/bookList/main",
+    "pages/getPaper/main",
     "pages/personalQR/main",
     "pages/questionPage/main",
     "pages/personalPage/main",
     "pages/todoList/main",
-    "pages/bookList/main",
     "pages/articleList/main",
     "pages/paper/main",
     "pages/paperList/main",

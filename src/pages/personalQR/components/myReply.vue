@@ -148,6 +148,7 @@ export default {
         data = await request('/personalQReply', {page: this.nowPage});
         data.forEach((element) => {
           element.before = handleTime.formatBefore(this.nowTime - element.time);
+          this.replyList.push(element);
         })
         console.log(data);
       }
